@@ -3,6 +3,60 @@ Hyperledger Explorer
 
 Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, open source browser for viewing activity on the underlying blockchain network.
 
+## Building the required Docker Images
+
+We need the following images to be built to use the `explorer`:
+
+1. `distributedid/postgres`
+
+This can be done by executing the following command inside the `bcmanager`:
+
+```
+docker build -t distributedid/postgres -f ./docker/Dockerfile.postgres .
+```
+
+1. `distributedid/explorer`
+
+This can be done by executing the command inside the `bcmanager`:
+
+```
+docker build -t distributedid/explorer -f ./docker/Dockerfile.explorer .
+```
+
+## How to run it ?
+
+Steps:
+
+1. The `diid.network` should be running. That is:
+
+```
+make startEnv initExchChannel initPrivChannel sendIdentity sendEvent queryID
+```
+
+1. Launch the `postgres` image. The `docker-compose.yml` file is at:
+
+```
+github.com/distributedID/bcmanager/docker/explorer
+```
+
+Use the command to launch the postgres image:
+```
+docker-compose up postgres-provider.diid.network
+```
+
+1. Change the `GOPATH` in the `blockchain-explorer` repository file
+`./config.json` as per the environment variables. That is, `/opt/gopath` should
+be changed to the user's `GOPATH` variable.
+
+1. Use the command to launch the `explorer`:
+
+```
+./start.sh && tail -f log.txt
+```
+
+1. Open the web-browser and access the `explorer` at `http://localhost:11000` .
+
+
 ## Directory Structure
 ```
 ├── app            Application backend root
