@@ -27,16 +27,38 @@ docker build -t distributedid/explorer -f ./docker/Dockerfile.explorer .
 
 Steps:
 
-1. The `diid.network` should be running. That is:
+Note: run within the bcmanager repository
+
+1. The `diid.network` should be running. That is the following commands (run separately):
 
 ```
-make startEnv initExchChannel initPrivChannel sendIdentity sendEvent queryID
+make startEnv
+```
+```
+make initExchChannel
+```
+```
+make initPrivChannel
+```
+```
+make sendIdentity
+```
+```
+make sendEvent
+```
+```
+make queryID
 ```
 
 1. Launch the `postgres` image. The `docker-compose.yml` file is at:
 
 ```
 github.com/distributedID/bcmanager/docker/explorer
+```
+Therefore enter the command :
+
+```
+cd /github.com/distributedID/bcmanager/docker/explorer
 ```
 
 Use the command to launch the postgres image:
@@ -48,7 +70,7 @@ docker-compose up postgres-provider.diid.network
 `./config.json` as per the environment variables. That is, `/opt/gopath` should
 be changed to the user's `GOPATH` variable.
 
-1. Use the command to launch the `explorer`:
+1. Use the command to launch the `explorer` run this command in a separate window in the `blockchain-explorer` repository:
 
 ```
 ./start.sh && tail -f log.txt
