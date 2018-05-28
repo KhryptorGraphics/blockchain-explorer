@@ -12,7 +12,7 @@ We need the following images to be built to use the `explorer`:
 This can be done by executing the following command inside the `bcmanager`:
 
 ```
-docker build -t distributedid/postgres -f ./docker/Dockerfile.postgres .
+bcmanager$ docker build -t distributedid/postgres -f ./docker/Dockerfile.postgres .
 ```
 
 1. `distributedid/explorer`
@@ -20,7 +20,7 @@ docker build -t distributedid/postgres -f ./docker/Dockerfile.postgres .
 This can be done by executing the command inside the `bcmanager`:
 
 ```
-docker build -t distributedid/explorer -f ./docker/Dockerfile.explorer .
+bcmanager$ docker build -t distributedid/explorer -f ./docker/Dockerfile.explorer .
 ```
 
 ## How to run it ?
@@ -29,25 +29,20 @@ Steps:
 
 Note: run within the bcmanager repository
 
-1. The `diid.network` should be running. That is the following commands (run separately):
+1. The `diid.network` should be running. That is the following commands (run
+separately):
 
 ```
-make startEnv
+bcmanager$ make startEnv
 ```
 ```
-make initExchChannel
+bcmanager$ make initExchChannel initPrivChannel
 ```
 ```
-make initPrivChannel
+bcmanager$ make sendIdentity sendEvent
 ```
 ```
-make sendIdentity
-```
-```
-make sendEvent
-```
-```
-make queryID
+bcmanager$ make queryID
 ```
 
 1. Launch the `postgres` image. The `docker-compose.yml` file is at:
@@ -55,25 +50,36 @@ make queryID
 ```
 github.com/distributedID/bcmanager/docker/explorer
 ```
-Therefore enter the command :
+
+Therefore enter the command:
 
 ```
 cd /github.com/distributedID/bcmanager/docker/explorer
 ```
 
 Use the command to launch the postgres image:
+
 ```
-docker-compose up postgres-provider.diid.network
+bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
 ```
 
 1. Change the `GOPATH` in the `blockchain-explorer` repository file
 `./config.json` as per the environment variables. That is, `/opt/gopath` should
 be changed to the user's `GOPATH` variable.
 
-1. Use the command to launch the `explorer` run this command in a separate window in the `blockchain-explorer` repository:
+1. Install the required packages:
 
 ```
-./start.sh && tail -f log.txt
+blockchain-explorer$ npm install
+blockchain-explorer/client$ npm install
+blockchain-explorer/client$ npm run build
+```
+
+1. Use the command to launch the `explorer` and run this command in a separate
+window in the `blockchain-explorer` repository:
+
+```
+blockchain-explorer$ ./start.sh && tail -f log.txt
 ```
 
 1. Open the web-browser and access the `explorer` at `http://localhost:11000` .
