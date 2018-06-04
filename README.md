@@ -27,10 +27,9 @@ bcmanager$ docker build -t distributedid/explorer -f ./docker/Dockerfile.explore
 
 Steps:
 
-Note: run within the bcmanager repository
+Note: run within the __bcmanager__ repository
 
-1. The `diid.network` should be running. That is the following commands (run
-separately):
+1. To run the `diid.network`. Enter the commands separately:
 
 ```
 bcmanager$ make startEnv
@@ -45,29 +44,24 @@ bcmanager$ make sendIdentity sendEvent
 bcmanager$ make queryID
 ```
 
-1. Launch the `postgres` image. The `docker-compose.yml` file is at:
+Note: run in a new window - still in the __bcmanager__ repository
 
-```
-github.com/distributedID/bcmanager/docker/explorer
-```
-
-Therefore enter the command:
+1. Navigate to the root directory of the `postgres` image by entering:
+(This will take you to the root of the `docker-compose.yml` file, which contains the image)
 
 ```
 cd /github.com/distributedID/bcmanager/docker/explorer
 ```
 
-Use the command to launch the postgres image:
+1. Use the command to launch the `postgres` image:
 
 ```
 bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
 ```
 
-1. Change the `GOPATH` in the `blockchain-explorer` repository file
-`./config.json` as per the environment variables. That is, `/opt/gopath` should
-be changed to the user's `GOPATH` variable.
+Note: run within a new window within the __blockchain-explorer__ repository
 
-1. Install the required packages:
+1. Install the required packages in the blockchain-explorer repository:
 
 ```
 blockchain-explorer$ npm install
@@ -79,10 +73,38 @@ blockchain-explorer/client$ npm run build
 window in the `blockchain-explorer` repository:
 
 ```
-blockchain-explorer$ ./start.sh && tail -f log.txt
+blockchain-explorer$ npm start
 ```
 
 1. Open the web-browser and access the `explorer` at `http://localhost:11000` .
+
+
+## How to stop it?
+
+Note: In the last window where the `blockchain-explorer` network was started.
+
+1. Tear down the network by entering the following command:
+```
+blockchain-explorer$ ^C (Ctrl-C)
+```
+
+Note: In the window where the `postgres` image was built.
+
+1. Tear down the image by entering the following command:
+
+```
+bcmanager/docker/explorer$ ^C (Ctrl-C)
+```
+
+Note: In the first window where the `diid.network` network was ran.
+
+1. Tear down the network by entering:
+
+```
+bcmanager$ make stopEnv
+```
+
+Note: These commands need to be preformed to properly tear down the networks so that they can be built in the future.
 
 
 ## Directory Structure
