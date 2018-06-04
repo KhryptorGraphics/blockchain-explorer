@@ -2,48 +2,48 @@ import React from 'react';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class Notifications extends React.Component {
-  createNotification = (type) => {
-    return () => {
+  createNotification (type){
+    //return () => {
       switch (type) {
         case 'info':
-          NotificationManager.info('Info message');
+          return NotificationManager.info('Info message');
           break;
         case 'success':
-          NotificationManager.success('Success message', 'Title here');
+          return NotificationManager.success('Success message', 'Title here');
           break;
         case 'warning':
-          NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+          return NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
           break;
         case 'error':
-          NotificationManager.error('Error message', 'Click me!', 5000, () => {
+          return NotificationManager.error('Error message', 'Click me!', 5000, () => {
             alert('callback');
           });
           break;
       }
     };
-  };
- //  render() {
- //   return (
- //     <div>
- //       <button className='btn btn-info'
- //         onClick={this.createNotification('info')}>Info
- //       </button>
- //       <hr/>
- //       <button className='btn btn-success'
- //         onClick={this.createNotification('success')}>Success
- //       </button>
- //       <hr/>
- //       <button className='btn btn-warning'
- //         onClick={this.createNotification('warning')}>Warning
- //       </button>
- //       <hr/>
- //       <button className='btn btn-danger'
- //         onClick={this.createNotification('error')}>Error
- //       </button>
- //
- //       <NotificationContainer/>
- //     </div>
- //   );
- // }
+
+  render() {
+   return (
+     <div>
+       <button className='btn btn-info'
+         onClick={this.createNotification('info')}>Info
+       </button>
+       <hr/>
+       <button className='btn btn-success'
+         onClick={this.createNotification('success')}>Success
+       </button>
+       <hr/>
+       <button className='btn btn-warning'
+         onClick={this.createNotification('warning')}>Warning
+       </button>
+       <hr/>
+       <button className='btn btn-danger'
+         onClick={this.createNotification('error')}>Error
+       </button>
+
+       <NotificationContainer/>
+     </div>
+   );
+ }
 }
 export default Notifications
