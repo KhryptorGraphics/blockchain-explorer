@@ -240,7 +240,6 @@ const mapDispatchToProps = (dispatch) => ({
   getUUIDStatusList: (curChannel) => dispatch(getUUIDStatusListCreator(curChannel))
 });
 
-console.log(state);
 const mapStateToProps = state => ({
   block: state.block.block,
   blockList: state.blockList.blockList,
