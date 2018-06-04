@@ -36,7 +36,9 @@ class MatchedUUID extends Component {
     }
 
     componentDidMount() {
-
+        setInterval(() => {
+            this.props.getUUIDStatusList(this.props.channel.currentChannel);
+        }, 6000)
     }
 
     render() {
