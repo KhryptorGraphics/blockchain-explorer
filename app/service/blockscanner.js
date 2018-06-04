@@ -50,8 +50,6 @@ function syncBlock() {
     }).catch(err => {
         logger.error(err)
     })
-
-
 }
 
 function* saveBlockRange(channelName, start, end) {
@@ -123,10 +121,14 @@ function* saveBlockRange(channelName, start, end) {
             } catch (err) {
             }
 
-            let payload
+            let originalPayload
+            let actualPayload
             try{
-                payload=JSON.stringify(tx.payload.data.actions[0].payload.action.proposal_response_payload.extension.response.payload)
+                originalPayload = tx.payload.data.actions[0].payload.action.proposal_response_payload.extension.response.payload
+                actualPayload = helper.getUUIDFromPayload(originalPayload)
             } catch(err) {
+                originalPayload = ""
+                actualPayload = ""
             }
 
             yield sql.saveRow('transaction',
@@ -141,12 +143,38 @@ function* saveBlockRange(channelName, start, end) {
                     'endorser_msp_id': mspId,
                     'chaincode_id': chaincodeID || "None",
                     'type': tx.payload.header.channel_header.typeString,
-                    'payload': payload || "None",
+                    'payload': actualPayload,
                     'read_set': JSON.stringify(readSet),
                     'write_set': JSON.stringify(writeSet)
                 })
 
             yield sql.updateBySql(`update chaincodes set txcount =txcount+1 where name = '${chaincode}' and channelname='${channelName}' `)
+
+            if (actualPayload) {
+                // Storing of the transaction as new record or update record depends on the transacton body here.
+                var row = yield sql.getRowByPkOne(`select * from uuid where id='${uuid}'`)
+                if (row && row.length > 0){
+                    // update the UUID row with the response.
+                    yield sql.updateRow('uuid',
+                        {
+                            'id': row.id,
+                            'reqcreatedt': row.reqcreatedt,
+                            'respayload': "Hello", // Something from tx comes here.
+                            'respayload': new Date(tx.payload.header.channel_header.timestamp)
+                        },
+                        "")
+                } else {
+                    // create a new row as it is being seen for the first time.
+                    yield sql.saveRow('uuid',
+                        {
+                            'id': actualPayload,
+                            'reqcreatedt': new Date(tx.payload.header.channel_header.timestamp),
+                            'respayload': "",
+                            "rescreatedt": new Date()
+                        })
+                }
+
+            }
         }
 
     }
