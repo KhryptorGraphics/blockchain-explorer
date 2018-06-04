@@ -7,13 +7,13 @@ const InitialState = new Record ({
     loaded: false,
     uuidList: [],
     errors: {},
-
 })
 
 const uuidList = handleActions({
     [actionTypes.UUID_LIST]: (state = InitialState(), action) => {
         action.payload.rows.forEach(element => {
             element.reqcreatedt = moment(element.reqcreatedt).tz(moment.tz.guess()).format("YYYY-MM-DD HH:mm")
+            element.rescreatedt = moment(element.rescreatedt).tz(moment.tz.guess()).format("YYYY-MM-DD HH:mm")
         })
         return (
             state
