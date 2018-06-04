@@ -82,7 +82,7 @@ class MenuBar extends Component {
     setInterval(() => {
       this.props.getCountHeader(this.props.channel.currentChannel);
       this.props.getLatestBlock(this.props.channel.currentChannel, 0);
-      this.props.getUUIDStatusRow(this.props.channel.currentChannel);
+      this.props.getUUIDStatusList(this.props.channel.currentChannel);
     }, 3000)
 
   }
