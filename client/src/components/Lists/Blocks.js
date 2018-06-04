@@ -9,8 +9,10 @@ import TransactionView from '../View/TransactionView';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import matchSorter from 'match-sorter';
+// import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Notifications from '../ReactNotifications';
 
-class Blocks extends Component {
+class Blocks extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -54,6 +56,7 @@ class Blocks extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({ totalBlocks: this.props.countHeader.latestBlock });
+        Notifications.createNotification('success')
     }
 
     componentDidMount() {
@@ -64,6 +67,7 @@ class Blocks extends Component {
 
     componentDidUpdate(prevProps, prevState) {
     }
+
 
     render() {
 
@@ -119,6 +123,13 @@ class Blocks extends Component {
 
         return (
             <div className="blockPage">
+                <div className="producerlabel">
+                    <button className='btn btn-success'
+                        onClick={Notifications.createNotification('success')}>Success
+                    </button>
+                    <Notifications />
+                </div>
+
                 <Container>
                     <Row>
                         <Col >
@@ -140,7 +151,7 @@ class Blocks extends Component {
                     maxWidth={'md'}>
                     <TransactionView transaction={this.props.transaction} />
                 </Dialog>
-            </div >
+            </div>
         );
     }
 };
