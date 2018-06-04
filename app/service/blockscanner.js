@@ -157,13 +157,10 @@ function* saveBlockRange(channelName, start, end) {
                 if (row && row.id == actualPayload){
                     // update the UUID row with the response.
 
-                    yield sql.updateRow('uuid',
-                        {
-                            'respayload': "Hello",
-                            'rescreatedt': new Date(tx.payload.header.channel_header.timestamp).toISOString()
-                        },{
-                            'id': actualPayload
-                        })
+                    var respayload = "Hello"
+                    var rescreatedt = new Date(tx.payload.header.channel_header.timestamp).toISOString()
+
+                    yield sql.updateBySql(`update uuid set respayload='${respayload}', rescreatedt='${rescreatedt}' where id='${actualPayload}' returning *`)
 
                 } else {
                     // create a new row as it is being seen for the first time.
