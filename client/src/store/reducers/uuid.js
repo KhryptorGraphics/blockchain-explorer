@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions'
 import { Record } from 'immutable'
-import * from actionTypes from '../action/action-types'
+import * as actionTypes from '../actions/action-types'
 
 const InitialState = new Record({
     loaded: false,
