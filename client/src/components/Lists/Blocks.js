@@ -58,7 +58,7 @@ class Blocks extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.setState({ totalBlocks: this.props.countHeader.latestBlock });
         if (this.state.blockHeight != this.props.blockList.length) {
-            this.setState({ type: "success" });
+            this.setState({ type: "info" });
         }
     }
 
