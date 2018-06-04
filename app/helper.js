@@ -39,6 +39,17 @@ var getLogger = function (moduleName) {
 	return logger;
 };
 
+var getUUIDFromPayload = function(strPayload) {
+	let uuid;
+	try {
+		var parsedPayload = JSON.stringify(strPayload).replace(/\\n/g, "").replace(/\\/g, "").replace("\"{", "{").replace("}\"", "}")
+		uuid = JSON.parse(parsedPayload).uuid;
+	} catch(err) {
+		uuid = "";
+	}
+	return uuid;
+}
 
 exports.getLogger = getLogger;
 exports.readAllFiles = readAllFiles;
+exports.getUUIDFromPayload = getUUIDFromPayload;

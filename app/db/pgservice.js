@@ -85,8 +85,8 @@ function saveRow(tablename, columnValues) {
         var updatesqlparmstr = updatesqlcolumn.join(',')
         var updatesqlflagstr = updatesqlflag.join(',')
         var addSql = `INSERT INTO ${tablename}  ( ${updatesqlparmstr} ) VALUES( ${updatesqlflagstr}  ) RETURNING *;`;
-        logger.debug(`Insert sql is ${addSql}`)
-        console.log(`Insert sql is ${addSql}`)
+        // logger.debug(`Insert sql is ${addSql}`)
+
         client.query(addSql, addSqlParams, (err, res) => {
 
             if (err) {
@@ -96,7 +96,7 @@ function saveRow(tablename, columnValues) {
             }
 
             logger.debug('--------------------------INSERT----------------------------');
-            console.log('INSERT ID:', res.rows[0].id);
+            logger.debug('INSERT ID:', res.rows[0].id);
             logger.debug('-----------------------------------------------------------------\n\n');
 
             resolve(res.rows[0].id)
@@ -166,8 +166,7 @@ function updateRowByPk(tablename, columnAndValue, pkName, pkValue) {
             }
 
             logger.debug('--------------------------UPDATE----------------------------');
-            //logger.debug(' update result :', result.affectedRows);
-            //console.log(res);
+            logger.debug(' update result :', result.affectedRows);
             logger.debug('-----------------------------------------------------------------\n\n');
 
             resolve(res.rows)
@@ -199,42 +198,31 @@ function updateRow(tablename, columnAndValue, condition) {
         var addSqlParams = []
         var updateParms = []
 
-        var updateparm = " set 1=1 "
-
+        var updateparm = ""
 
         Object.keys(columnAndValue).forEach((k) => {
-
             let v = columnAndValue[k]
 
             addSqlParams.push(v)
-            //updateparm = updateparm + ` ,${k}=? `
-            updateParms.push(`${k} = ?`)
-
+            updateParms.push(` ${k} = '${v}' `)
         })
+        var updateParmsStr = updateParms.join(',')
 
-        var updatewhereparm = " (1=1)  "
-
+        var updatewhereparm = " (1=1) "
 
         Object.keys(condition).forEach((k) => {
-
             let v = condition[k]
 
             addSqlParams.push(v)
-            updatewhereparm = updatewhereparm + ` and ${k}=? `
-
+            updatewhereparm = updatewhereparm + ` and ${k} = '?' `
         })
-
-
-        var updateParmsStr = updateParms.join(',')
 
         var addSql = ` UPDATE ${tablename} set ${updateParmsStr} WHERE ${updatewhereparm} RETURNING * `;
 
-        logger.debug(`update sql is ${addSql}`)
-        console.log(`update sql is ${addSql}`)
-        client.query(addSql, addSqlParams, (err, res) => {
+        client.query(addSql, [], (err, res) => {
 
             if (err) {
-                logger.error('[INSERT ERROR] - ', err.message);
+                logger.error('[UPDATE ERROR] - ', err.message);
                 reject(err)
             }
 
@@ -261,6 +249,7 @@ function updateBySql(updateSql) {
         logger.debug(`update sql is :  ${updateSql}`)
 
         client.query(updateSql, [], (err, res) => {
+
 
             if (err) {
                 logger.error('[INSERT ERROR] - ', err.message);
@@ -457,7 +446,6 @@ function getRowsBySQlQuery(sql) {
 
     return new Promise(function (resolve, reject) {
         client.query(sql, (err, res) => {
-
             if (err) {
                 reject(err)
             }
@@ -488,7 +476,6 @@ function getRowsBySQlNoCondtion(sqlcharacter, limit) {
         var sql = `${sqlcharacter} ${limit}`
 
         client.query(sqlcharacter, (err, res) => {
-
             if (err) {
                 reject(err)
             }
@@ -636,5 +623,3 @@ exports.getSQL2Map4Arr = getSQL2Map4Arr
 
 exports.openconnection = openconnection
 exports.closeconnection = closeconnection
-
-

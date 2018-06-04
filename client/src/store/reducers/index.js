@@ -18,6 +18,8 @@ import txPerHour from './txPerHour';
 import chaincodes from './chaincodes';
 import notification from './notification';
 import txByOrg from './txByOrg';
+import uuid from './uuid';
+import uuidList from './uuidList';
 export default combineReducers({
     peerList,
     channelList,
@@ -33,5 +35,7 @@ export default combineReducers({
     txPerHour,
     chaincodes,
     notification,
-    txByOrg
+    txByOrg,
+    uuid,
+    uuidList
 })

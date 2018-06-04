@@ -54,11 +54,6 @@ class TransactionView extends Component {
         this.setState({ loading: false });
     }
 
-    getUUID(jsonObj) {
-        var obj = JSON.parse(jsonObj);
-        return JSON.parse(jsonObj).uuid;
-    }
-
     render() {
         const { classes } = this.props;
         if (this.props.transaction.read_set === undefined) {
@@ -85,7 +80,7 @@ class TransactionView extends Component {
                             <b>Endorser:</b> {this.props.transaction.endorser_msp_id} <br />
                             <b>Chaincode Name:</b> {this.props.transaction.chaincode_id} <br />
                             <b>Type:</b> {this.props.transaction.type} <br />
-                            <b>Payload:</b> {this.getUUID(this.props.transaction.payload.replace(/\\/g, "").replace("\"{", "{").replace("}\"", "}")) }<br />
+                            <b>Payload:</b> { this.props.transaction.payload }<br />
                             <b>Time:</b> {moment(this.props.transaction.createdt).tz(moment.tz.guess()).format("M-D-YYYY h:mm A zz")} <br />
                             <b>Reads:</b>
                              <ul>
