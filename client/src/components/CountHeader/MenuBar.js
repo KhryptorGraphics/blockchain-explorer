@@ -21,7 +21,7 @@ import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/hea
 import { getTransactionList as getTransactionListCreator } from '../../store/actions/transactions/action-creators';
 import { getUUIDStatusRow as getUUIDStatusRowCreator } from '../../store/actions/matcheduuid/action-creators';
 import { getUUIDStatusList as getUUIDStatusListCreator } from '../../store/actions/matcheduuids/action-creators';
-
+import Notifications from '../ReactNotifications';
 
 import {
   Navbar,
@@ -62,6 +62,7 @@ class MenuBar extends Component {
     this.handleClickPeerView = this.handleClickPeerView.bind(this);
     this.handleClickDashboardView = this.handleClickDashboardView.bind(this);
     this.handleClickMatchedUUIDView = this.handleClickMatchedUUIDView.bind(this);
+    this.displayNotifFunc = this.displayNotifFunc.bind(this);
   }
 
   componentWillMount() {
@@ -73,8 +74,20 @@ class MenuBar extends Component {
       // console.log('nextProps.countHeader !== this.props.countHeader')
       this.setState({ countHeader: nextProps.countHeader });
     }
+
+    console.log(this.state.blockHeight);
+    console.log(this.props.blockList.length);
+    if (this.state.blockHeight != this.props.blockList.length){
+        this.setState({ type: "success", blockHeight: this.props.blockList.length });
+        this.displayNotifFunc(true)
+    } else {
+        this.displayNotifFunc(false)
+    }
   }
 
+  displayNotifFunc(value) {
+      this.setState({ displayNotif: value });
+  }
 
   componentDidMount() {
 
@@ -215,6 +228,10 @@ class MenuBar extends Component {
               <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }>UUID</NavItem>
             </Nav>
           </Navbar>
+        </div>
+
+        <div className="producerlabel" active={this.state.displayNotif}>
+            <Notifications type={this.state.type}/>
         </div>
 
 

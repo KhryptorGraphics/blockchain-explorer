@@ -2,9 +2,18 @@ import React from 'react';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class Notifications extends React.Component {
-  createNotification (type){
-    //return () => {
-      switch (type) {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            type: "warning"
+        }
+
+        this.createNotification = this.createNotification.bind(this);
+    }
+
+  createNotification = () => {
+      switch (this.state.type) {
         case 'info':
           return NotificationManager.info('Info message');
           break;
@@ -20,30 +29,23 @@ class Notifications extends React.Component {
           });
           break;
       }
-    };
+  };
+
+  componentWillReceiveProps(nextProps) {
+      this.setState({ type: this.props.type });
+      this.createNotification();
+  }
 
   render() {
    return (
      <div>
-       <button className='btn btn-info'
-         onClick={this.createNotification('info')}>Info
-       </button>
-       <hr/>
-       <button className='btn btn-success'
-         onClick={this.createNotification('success')}>Success
-       </button>
-       <hr/>
-       <button className='btn btn-warning'
-         onClick={this.createNotification('warning')}>Warning
-       </button>
-       <hr/>
-       <button className='btn btn-danger'
-         onClick={this.createNotification('error')}>Error
-       </button>
-
        <NotificationContainer/>
      </div>
-   );
- }
+    );
+    };
+
+ // <button className='btn btn-success'
+ // onClick={Notifications.createNotification('success')}>Success
+ // </button>
 }
-export default Notifications
+export default Notifications;
