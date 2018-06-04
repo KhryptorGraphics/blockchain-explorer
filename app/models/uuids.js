@@ -1,8 +1,8 @@
 var sql = require('../db/pgservice.js');
 
 function getUUIDStatusList(channelName) {
-    let sqlUUIDList = `selecct * from UUID`;
-    return sql.getRowsBySQlQuery(sqlUUIDList);
+    let sqlUUIDList = `select * from UUID`;
+    return sql.getRowsBySQlNoCondtion(sqlUUIDList);
 }
 
 function getUUIDStatusRow(channelName) {
@@ -11,5 +11,5 @@ function getUUIDStatusRow(channelName) {
 }
 
 
-exports.getUUIDStatusList = getUUIDStatusList
-exports.getUUIDStatusRow = getUUIDStatusRow
+exports.getUUIDStatusList = getUUIDStatusList;
+exports.getUUIDStatusRow = getUUIDStatusRow;
