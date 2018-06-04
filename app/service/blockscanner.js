@@ -152,17 +152,19 @@ function* saveBlockRange(channelName, start, end) {
 
             if (actualPayload) {
                 // Storing of the transaction as new record or update record depends on the transacton body here.
-                var row = yield sql.getRowByPkOne(`select * from uuid where id='${uuid}'`)
-                if (row && row.length > 0){
+                var row = yield sql.getRowByPkOne(`select * from uuid where id='${actualPayload}'`)
+
+                if (row && row.id == actualPayload){
                     // update the UUID row with the response.
+
                     yield sql.updateRow('uuid',
                         {
-                            'id': row.id,
-                            'reqcreatedt': row.reqcreatedt,
-                            'respayload': "Hello", // Something from tx comes here.
-                            'respayload': new Date(tx.payload.header.channel_header.timestamp)
-                        },
-                        "")
+                            'respayload': "Hello",
+                            'rescreatedt': new Date(tx.payload.header.channel_header.timestamp).toISOString()
+                        },{
+                            'id': actualPayload
+                        })
+
                 } else {
                     // create a new row as it is being seen for the first time.
                     yield sql.saveRow('uuid',
