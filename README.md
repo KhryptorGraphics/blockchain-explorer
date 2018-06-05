@@ -16,6 +16,11 @@ Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, op
 	├── timer          Timer to post information periodically
 	└── utils          Various utility scripts
 ├── client          Web Ui
+	├── build       	Build
+	├── node_modules    Node Modules
+	├── public	   		Holds the files for the tab bar
+	└── src          	Source Files
+
 
 ```
 
@@ -90,11 +95,11 @@ bcmanager$ docker build -t distributedid/postgres -f ./docker/Dockerfile.postgre
 bcmanager$ docker build -t distributedid/explorer -f ./docker/Dockerfile.explorer .
 ```
 
-## How to start/run the networks?
+## How to start it?
 
 Steps:
 
-### Phase 1:
+### Window 1:
 
 Note: Run within the __bcmanager__ repository
 
@@ -113,7 +118,7 @@ bcmanager$ make sendIdentity sendEvent
 bcmanager$ make queryID
 ```
 
-### Phase 2:
+### Window 2:
 
 Note: Open a new window and run in the __bcmanager__ repository
 
@@ -130,7 +135,7 @@ cd /github.com/distributedID/bcmanager/docker/explorer
 bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
 ```
 
-### Phase 3:
+### Window 3:
 
 Note: Open a new window and run within the __blockchain-explorer__ repository. These install commands must be run when a new branch is started or a navigated to.
 
@@ -143,7 +148,7 @@ blockchain-explorer$ npm install
 blockchain-explorer/client$ npm install
 ```
 
-### Phase 4:
+### Window 4:
 
 Note: Open a new window and run within the __blockchain-explorer__ repository
 
