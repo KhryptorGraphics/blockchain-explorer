@@ -77,12 +77,14 @@ class MenuBar extends Component {
     }
 
     if (this.state.blockHeight != this.props.countHeader.latestBlock){
-        notify.show('Block Added !!');
+        let myColour = { background: '#225119', text: "#ffffff" };
+        notify.show('Block Added !!', "custom", 5000, myColour);
         this.setState({ blockHeight: this.props.countHeader.latestBlock });
     }
 
     if (this.state.uuidHeight != this.props.uuidList.length) {
-        notify.show('New UUID Added !!!');
+        let myColour = { background: '#225119', text: "#ffffff" };
+        notify.show('New UUID Added !!!', "custom", 5000, myColour);
         this.setState({ uuidHeight: this.props.uuidList.length });
     }
   }
@@ -215,9 +217,6 @@ class MenuBar extends Component {
 
     return (
       <div>
-      <div className="producerlabel">
-          <Notifications />
-      </div>
         <div className="menuItems">
           <Navbar color="faded" light expand="md" margin-left="0px">
             <Nav className="ml-auto" navbar>
@@ -234,6 +233,12 @@ class MenuBar extends Component {
         <div style={{ position: 'absolute', top: 140, left: 30, zIndex: 1000 }}>
           {currentView}
         </div>
+
+        <div className="producerlabel">
+            <Notifications />
+        </div>
+
+
       </div>
     );
   }
