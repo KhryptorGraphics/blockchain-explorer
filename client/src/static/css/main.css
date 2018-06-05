@@ -178,8 +178,8 @@ div.custom-container {
 }
 
 svg.custom .node circle {
-	fill: #F3F3FF;
-	stroke: #2593B8;
+    fill: #29621e;
+	stroke: #29621e;
 	stroke-width: 1.5px;
 }
 
@@ -197,7 +197,7 @@ svg.custom .node {
 
 svg.custom path.link {
 	fill: none;
-	stroke: #2593B8;
+	stroke: #29621e;
 	stroke-width: 1.5px;
 }
 
