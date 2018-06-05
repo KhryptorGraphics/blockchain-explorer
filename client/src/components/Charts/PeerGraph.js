@@ -44,7 +44,7 @@ class PeerGraph extends Component {
                     fontSize: 10,
                     fontWeight: "bold",
                     labelProperty: "id",
-                    color: '#5bc5c2',
+                    color: '#29621e',
                     size: 200
                 },
                 links: {

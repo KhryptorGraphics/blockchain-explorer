@@ -7,15 +7,15 @@ import React, { Component } from 'react';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import { PieChart, Pie, Tooltip, Legend } from 'recharts';
 import txByOrg from '../../store/reducers/txByOrg';
-const colors = ['#0B091A','#6283D0','#0D3799','#7C7C7C'];
+const colors = ['#0B091A','#29621e','#6ecd5b','#7C7C7C'];
 class OrgPieChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [
                 { value: 43, name: "OrdererMSP", fill: "#0B091A" },
-                { value: 60, name: "Org1MSP", fill: "#6283D0" },
-                { value: 23, name: "Org2MSP", fill: "#0D3799" }
+                { value: 60, name: "Org1MSP", fill: "#29621e" },
+                { value: 23, name: "Org2MSP", fill: "#6ecd5b" }
             ]
 
         }
