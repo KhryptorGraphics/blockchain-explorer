@@ -46,7 +46,9 @@ class Transactions extends Component {
   }
 
   componentDidMount() {
-
+      setInterval(() => {
+          this.props.getTransactionList(this.props.channel.currentChannel, this.state.currentOffset);
+      }, 60000)
   }
 
   render() {
