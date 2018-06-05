@@ -92,20 +92,11 @@ function* saveBlockRange(channelName, start, end) {
             } catch (err) {
             }
 
-            let rwset
-            let readSet
-            let writeSet
-            try {
-                rwset = tx.payload.data.actions[0].payload.action.proposal_response_payload.extension.results.ns_rwset
-                readSet = rwset.map(i => { return { 'chaincode': i.namespace, 'set': i.rwset.reads } })
-                writeSet = rwset.map(i => { return { 'chaincode': i.namespace, 'set': i.rwset.writes } })
-            } catch (err) {
-            }
-
             let chaincodeID
             try {
                 chaincodeID = tx.payload.data.actions[0].payload.action.proposal_response_payload.extension.chaincode_id.name
             } catch (err) {
+                chaincodeID = ""
             }
 
             let status
@@ -141,11 +132,9 @@ function* saveBlockRange(channelName, start, end) {
                     'status': status,
                     'creator_msp_id': tx.payload.header.signature_header.creator.Mspid,
                     'endorser_msp_id': mspId,
-                    'chaincode_id': chaincodeID || "None",
+                    'chaincode_id': chaincodeID,
                     'type': tx.payload.header.channel_header.typeString,
-                    'payload': actualPayload,
-                    'read_set': JSON.stringify(readSet),
-                    'write_set': JSON.stringify(writeSet)
+                    'payload': actualPayload
                 })
 
             yield sql.updateBySql(`update chaincodes set txcount =txcount+1 where name = '${chaincode}' and channelname='${channelName}' `)

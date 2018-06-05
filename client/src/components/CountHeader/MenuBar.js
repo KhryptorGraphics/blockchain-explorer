@@ -77,22 +77,14 @@ class MenuBar extends Component {
     }
 
     if (this.state.blockHeight != this.props.countHeader.latestBlock){
-<<<<<<< HEAD
         let myColour = { background: '#225119', text: "#ffffff" };
         notify.show('Block Added !!', "custom", 5000, myColour);
-=======
-        notify.show('Block Added !!');
->>>>>>> master
         this.setState({ blockHeight: this.props.countHeader.latestBlock });
     }
 
     if (this.state.uuidHeight != this.props.uuidList.length) {
-<<<<<<< HEAD
         let myColour = { background: '#225119', text: "#ffffff" };
         notify.show('New UUID Added !!!', "custom", 5000, myColour);
-=======
-        notify.show('New UUID Added !!!');
->>>>>>> master
         this.setState({ uuidHeight: this.props.uuidList.length });
     }
   }
