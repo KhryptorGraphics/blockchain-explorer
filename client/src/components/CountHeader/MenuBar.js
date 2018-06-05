@@ -21,7 +21,7 @@ import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/hea
 import { getTransactionList as getTransactionListCreator } from '../../store/actions/transactions/action-creators';
 import { getUUIDStatusRow as getUUIDStatusRowCreator } from '../../store/actions/matcheduuid/action-creators';
 import { getUUIDStatusList as getUUIDStatusListCreator } from '../../store/actions/matcheduuids/action-creators';
-
+import Notifications, { notify } from 'react-notify-toast';
 
 import {
   Navbar,
@@ -53,7 +53,9 @@ class MenuBar extends Component {
     this.state = {
       activeView: 'DashboardView',
       activeTab: { dashboardTab: true, peersTab: false, blocksTab: false, chaincodesTab: false, matchedUUIDTab: false },
-      countHeader: { countHeader: this.props.getCountHeader() }
+      countHeader: { countHeader: this.props.getCountHeader() },
+      blockHeight: 0,
+      uuidHeight: 0
     }
 
     this.handleClickTransactionView = this.handleClickTransactionView.bind(this);
@@ -73,8 +75,17 @@ class MenuBar extends Component {
       // console.log('nextProps.countHeader !== this.props.countHeader')
       this.setState({ countHeader: nextProps.countHeader });
     }
-  }
 
+    if (this.state.blockHeight != this.props.countHeader.latestBlock){
+        notify.show('Block Added !!');
+        this.setState({ blockHeight: this.props.countHeader.latestBlock });
+    }
+
+    if (this.state.uuidHeight != this.props.uuidList.length) {
+        notify.show('New UUID Added !!!');
+        this.setState({ uuidHeight: this.props.uuidList.length });
+    }
+  }
 
   componentDidMount() {
 
@@ -204,6 +215,9 @@ class MenuBar extends Component {
 
     return (
       <div>
+      <div className="producerlabel">
+          <Notifications />
+      </div>
         <div className="menuItems">
           <Navbar color="faded" light expand="md" margin-left="0px">
             <Nav className="ml-auto" navbar>
@@ -216,7 +230,6 @@ class MenuBar extends Component {
             </Nav>
           </Navbar>
         </div>
-
 
         <div style={{ position: 'absolute', top: 140, left: 30, zIndex: 1000 }}>
           {currentView}
