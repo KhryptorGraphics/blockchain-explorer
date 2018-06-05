@@ -22,4 +22,5 @@ export const COUNT_HEADER_POST = `${namespaces}/COUNT_HEADER_POST`;
 export const CHAINCODE_LIST = `${namespaces}/CHAINCODE_LIST`;
 export const NOTIFICATION_LOAD = `${namespaces}/NOTIFICATION_LOAD`;
 export const TX_CHART_ORG = `${namespaces}/TX_CHART_ORG`;
-
+export const UUID_LIST = `${namespaces}/UUID_LIST`;
+export const UUID_ROW = `${namespaces}/UUID_ROW`;

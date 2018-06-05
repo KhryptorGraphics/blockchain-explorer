@@ -12,13 +12,16 @@ import Transactions from '../Lists/Transactions';
 import DashboardView from '../View/DashboardView';
 import Channels from '../Lists/Channels';
 import Chaincodes from '../Lists/Chaincodes';
+import MatchedUUID from '../Lists/MatchedUUID';
 import { getChaincodes as getChaincodesCreator } from '../../store/actions/chaincodes/action-creators';
 import { getBlockList as getBlockListCreator } from '../../store/actions/block/action-creators';
 import { getTransactionInfo as getTransactionInfoCreator } from '../../store/actions/transaction/action-creators';
 import { getLatestBlock as getLatestBlockCreator } from '../../store/actions/latestBlock/action-creators';
 import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/header/action-creators';
 import { getTransactionList as getTransactionListCreator } from '../../store/actions/transactions/action-creators';
-
+import { getUUIDStatusRow as getUUIDStatusRowCreator } from '../../store/actions/matcheduuid/action-creators';
+import { getUUIDStatusList as getUUIDStatusListCreator } from '../../store/actions/matcheduuids/action-creators';
+import Notifications, { notify } from 'react-notify-toast';
 
 import {
   Navbar,
@@ -49,8 +52,10 @@ class MenuBar extends Component {
     super(props);
     this.state = {
       activeView: 'DashboardView',
-      activeTab: { dashboardTab: true, peersTab: false, blocksTab: false, chaincodesTab: false },
-      countHeader: { countHeader: this.props.getCountHeader() }
+      activeTab: { dashboardTab: true, peersTab: false, blocksTab: false, chaincodesTab: false, matchedUUIDTab: false },
+      countHeader: { countHeader: this.props.getCountHeader() },
+      blockHeight: 0,
+      uuidHeight: 0
     }
 
     this.handleClickTransactionView = this.handleClickTransactionView.bind(this);
@@ -58,6 +63,7 @@ class MenuBar extends Component {
     this.handleClickChannelView = this.handleClickChannelView.bind(this);
     this.handleClickPeerView = this.handleClickPeerView.bind(this);
     this.handleClickDashboardView = this.handleClickDashboardView.bind(this);
+    this.handleClickMatchedUUIDView = this.handleClickMatchedUUIDView.bind(this);
   }
 
   componentWillMount() {
@@ -69,15 +75,27 @@ class MenuBar extends Component {
       // console.log('nextProps.countHeader !== this.props.countHeader')
       this.setState({ countHeader: nextProps.countHeader });
     }
-  }
 
+    if (this.state.blockHeight != this.props.countHeader.latestBlock){
+        let myColour = { background: '#29621e', text: "#ffffff" };
+        notify.show('Block Added !!', "custom", 5000, myColour);
+        this.setState({ blockHeight: this.props.countHeader.latestBlock });
+    }
+
+    if (this.state.uuidHeight != this.props.uuidList.length) {
+        let myColour = { background: '#29621e', text: "#ffffff" };
+        notify.show('New UUID Added !!!', "custom", 5000, myColour);
+        this.setState({ uuidHeight: this.props.uuidList.length });
+    }
+  }
 
   componentDidMount() {
 
 
     setInterval(() => {
       this.props.getCountHeader(this.props.channel.currentChannel);
-      this.props.getLatestBlock(this.props.channel.currentChannel,0);
+      this.props.getLatestBlock(this.props.channel.currentChannel, 0);
+      this.props.getUUIDStatusList(this.props.channel.currentChannel);
     }, 3000)
 
   }
@@ -93,7 +111,9 @@ class MenuBar extends Component {
         peersTab: false,
         blocksTab: false,
         txTab: true,
-        chaincodesTab: false      }
+        chaincodesTab: false,
+        matchedUUIDTab: false
+      }
     });
   }
   handleClickBlockView() {
@@ -104,7 +124,8 @@ class MenuBar extends Component {
         peersTab: false,
         blocksTab: true,
         txTab: false,
-        chaincodesTab: false
+        chaincodesTab: false,
+        matchedUUIDTab: false
       }
     });
   }
@@ -119,7 +140,8 @@ class MenuBar extends Component {
         peersTab: true,
         blocksTab: false,
         txTab: false,
-        chaincodesTab: false
+        chaincodesTab: false,
+        matchedUUIDTab: false
       }
     });
   }
@@ -131,7 +153,8 @@ class MenuBar extends Component {
         peersTab: false,
         blocksTab: false,
         txTab: false,
-        chaincodesTab: false
+        chaincodesTab: false,
+        matchedUUIDTab: false
       }
     });
   }
@@ -143,7 +166,21 @@ class MenuBar extends Component {
         peersTab: false,
         blocksTab: false,
         txTab: false,
-        chaincodesTab: true
+        chaincodesTab: true,
+        matchedUUIDTab: false
+      }
+    });
+  }
+  handleClickMatchedUUIDView = () => {
+    this.setState({ activeView: 'MatchedUUIDView' });
+    this.setState({
+      activeTab: {
+        dashboardTab: false,
+        peersTab: false,
+        blocksTab: false,
+        txTab: false,
+        chaincodesTab: false,
+        matchedUUIDTab: true
       }
     });
   }
@@ -168,7 +205,10 @@ class MenuBar extends Component {
         currentView = <DashboardView />;
         break;
       case 'ChaincodeView':
-        currentView = <Chaincodes channel={this.props.channel} countHeader={this.props.countHeader} chaincodes={this.props.chaincodes} getChaincodes={this.props.getChaincodes}/>
+        currentView = <Chaincodes channel={this.props.channel} countHeader={this.props.countHeader} chaincodes={this.props.chaincodes} getChaincodes={this.props.getChaincodes}/>;
+        break;
+      case 'MatchedUUIDView':
+        currentView = <MatchedUUID channel={this.props.channel} countHeader={this.props.countHeader} uuidList={this.props.uuidList.rows} getUUIDStatusList={this.props.getUUIDStatusList} uuid={this.props.uuid} getUUIDStatusRow={this.props.getUUIDStatusRow}/>;
         break;
       default:
         currentView = <DashboardView />;
@@ -178,21 +218,27 @@ class MenuBar extends Component {
     return (
       <div>
         <div className="menuItems">
-          <Navbar color="faded" light expand="md">
+          <Navbar color="faded" light expand="md" margin-left="0px">
             <Nav className="ml-auto" navbar>
-              <NavItem active={this.state.activeTab.dashboardTab} onClick={this.handleClickDashboardView}>DASHBOARD </NavItem>
-              <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>NETWORK  </NavItem>
-              <NavItem active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView}>BLOCKS </NavItem>
+              <NavItem active={this.state.activeTab.dashboardTab} onClick={this.handleClickDashboardView}>DASHBOARD</NavItem>
+              <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>NETWORK</NavItem>
+              <NavItem active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView}>BLOCKS</NavItem>
               <NavItem active={this.state.activeTab.txTab} onClick={this.handleClickTransactionView}>TRANSACTIONS</NavItem>
               <NavItem active={this.state.activeTab.chaincodesTab} onClick={this.handleClickChaincodeView }>CHAINCODES</NavItem>
+              <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }>UUID</NavItem>
             </Nav>
           </Navbar>
         </div>
 
-
         <div style={{ position: 'absolute', top: 140, left: 30, zIndex: 1000 }}>
           {currentView}
         </div>
+
+        <div className="producerlabel">
+            <Notifications />
+        </div>
+
+
       </div>
     );
   }
@@ -200,16 +246,17 @@ class MenuBar extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   getLatestBlock: (curChannel) => dispatch(getLatestBlockCreator(curChannel)),
-  getBlockList: (channel,offset) => dispatch(getBlockListCreator(channel,offset)),
-  getChaincodes: (channel,offset) => dispatch(getChaincodesCreator(channel,offset)),
+  getBlockList: (channel, offset) => dispatch(getBlockListCreator(channel, offset)),
+  getChaincodes: (channel, offset) => dispatch(getChaincodesCreator(channel, offset)),
   getChannel: (channel, offset) => null,
   getChannelList: (offset) => null,
   getCountHeader: (curChannel) => dispatch(getCountHeaderCreator(curChannel)),
   getPeerList: (curChannel) => null,
-  getTransactionInfo: (curChannel,tx_id) => dispatch(getTransactionInfoCreator(curChannel,tx_id)),
-  getTransactionList: (curChannel,offset) => dispatch(getTransactionListCreator(curChannel,offset))
+  getTransactionInfo: (curChannel, tx_id) => dispatch(getTransactionInfoCreator(curChannel, tx_id)),
+  getTransactionList: (curChannel, offset) => dispatch(getTransactionListCreator(curChannel, offset)),
+  getUUIDStatusRow: (curChannel) => dispatch(getUUIDStatusRowCreator(curChannel)),
+  getUUIDStatusList: (curChannel) => dispatch(getUUIDStatusListCreator(curChannel))
 });
-
 
 const mapStateToProps = state => ({
   block: state.block.block,
@@ -221,6 +268,8 @@ const mapStateToProps = state => ({
   peerList: state.peerList.peerList,
   transaction: state.transaction.transaction,
   transactionList: state.transactionList.transactionList,
+  uuid: state.uuid.uuid,
+  uuidList: state.uuidList.uuidList
 });
 
 

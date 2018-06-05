@@ -2,9 +2,6 @@
     SPDX-License-Identifier: Apache-2.0
 */
 
-var co = require('co')
-var helper = require('../helper.js');
-var logger = helper.getLogger('transactions');
 var sql = require('../db/pgservice.js');
 
 function getTransactionByID(channelName, txhash) {

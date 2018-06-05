@@ -32,7 +32,7 @@ const TimeChart = ({ chartData }) => {
             <XAxis dataKey="datetime" />
             <YAxis domain={[0, dataMax]} dataKey="count" />
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter data={displayData} fill="#5bc5c2" line={{stroke: '#5bc5c2', strokeWidth: 2}} />
+            <Scatter data={displayData} fill="#29621e" line={{stroke: '#29621e', strokeWidth: 2}} />
           </ScatterChart>
         </CardContent>
       </Card>

@@ -163,4 +163,15 @@ ALTER TABLE write_lock owner to diid;
 
 ALTER SEQUENCE write_lock_write_lock_seq restart WITH 2;
 
+DROP TABLE IF EXISTS uuid;
+
+CREATE TABLE uuid (
+    id                  varchar(64)                 PRIMARY KEY,
+    reqcreatedt         timestamp                   DEFAULT NULL,
+    respayload          character varying(1000)     DEFAULT NULL,
+    rescreatedt         timestamp                   DEFAULT NULL
+);
+
+ALTER TABLE uuid owner to diid;
+
 GRANT SELECT, INSERT, UPDATE,DELETE ON ALL TABLES IN SCHEMA PUBLIC to diid;

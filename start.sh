@@ -5,5 +5,6 @@
 #!/bin/bash
 
 rm -rf /tmp/fabric-client-kvs_Org*
+sed -i -- 's@\/opt\/gopath@'"$GOPATH"'@g' config.json
 
-node main.js >log.txt 2>&1 &
+node main.js

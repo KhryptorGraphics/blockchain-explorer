@@ -18,6 +18,7 @@ var requtil = require('./app/utils/requestutils.js')
 var logger = helper.getLogger('main');
 var txModel = require('./app/models/transactions.js')
 var blocksModel = require('./app/models/blocks.js')
+var uuidModel = require('./app/models/uuids.js')
 var configuration = require('./app/FabricConfiguration.js')
 var url = require('url');
 var WebSocket = require('ws');
@@ -450,6 +451,44 @@ app.get("/api/txByOrg/:channel", function (req, res) {
         return requtil.invalidRequest(req, res)
     }
 });
+
+/***
+UUIDs List requested and responded back with.
+GET /api/uuidlist/<channel>
+curl -i 'http://<host>:<port>//api/uuidlist/<channel>'
+Response:
+{"rows":[{"id":"4abc","reqcreatedt":"2018-05-31 12:00", "respayload":"Yes", "rescreatedt":"2018-05-31 12:00"}]}
+
+*/
+
+app.get("/api/uuidlist/:channel", function (req, res) {
+
+    let channelName = req.params.channel;
+    if (channelName) {
+        uuidModel.getUUIDStatusList(channelName)
+            .then(rows => {
+                if (rows) {
+                    return res.send({ status: 200, rows: rows })
+                }
+            })
+    } else {
+        return requtil.invalidRequest(req, res)
+    }
+});
+
+app.get("/api/uuid/:channel", function (req, res) {
+    let channelName = req.params.channel;
+
+    if(channelName) {
+        uuidModel.getUUIDStatusRow(channelName)
+            .then(row => {
+                if (row) {
+                    return res.send({ status: 200, row: row })
+                }
+            })
+    }
+})
+
 /***
     An API to create a channel
 POST /api/channel

@@ -10,7 +10,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import matchSorter from 'match-sorter';
 
-class Blocks extends Component {
+class Blocks extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +18,8 @@ class Blocks extends Component {
             toolTipOpen2: false,
             dialogOpen: false,
             loading: false,
-            totalBlocks: this.props.countHeader.latestBlock
+            totalBlocks: this.props.countHeader.latestBlock,
+            blockHeight: this.props.blockList.length
         }
         this.toggle1 = this.toggle1.bind(this);
         this.toggle2 = this.toggle2.bind(this);
@@ -64,6 +65,7 @@ class Blocks extends Component {
 
     componentDidUpdate(prevProps, prevState) {
     }
+
 
     render() {
 
@@ -117,6 +119,7 @@ class Blocks extends Component {
             }
           ];
 
+
         return (
             <div className="blockPage">
                 <Container>
@@ -140,7 +143,7 @@ class Blocks extends Component {
                     maxWidth={'md'}>
                     <TransactionView transaction={this.props.transaction} />
                 </Dialog>
-            </div >
+            </div>
         );
     }
 };

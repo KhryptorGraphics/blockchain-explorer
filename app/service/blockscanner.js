@@ -50,8 +50,6 @@ function syncBlock() {
     }).catch(err => {
         logger.error(err)
     })
-
-
 }
 
 function* saveBlockRange(channelName, start, end) {
@@ -94,20 +92,11 @@ function* saveBlockRange(channelName, start, end) {
             } catch (err) {
             }
 
-            let rwset
-            let readSet
-            let writeSet
-            try {
-                rwset = tx.payload.data.actions[0].payload.action.proposal_response_payload.extension.results.ns_rwset
-                readSet = rwset.map(i => { return { 'chaincode': i.namespace, 'set': i.rwset.reads } })
-                writeSet = rwset.map(i => { return { 'chaincode': i.namespace, 'set': i.rwset.writes } })
-            } catch (err) {
-            }
-
             let chaincodeID
             try {
                 chaincodeID = tx.payload.data.actions[0].payload.action.proposal_response_payload.extension.chaincode_id.name
             } catch (err) {
+                chaincodeID = ""
             }
 
             let status
@@ -123,10 +112,14 @@ function* saveBlockRange(channelName, start, end) {
             } catch (err) {
             }
 
-            let payload
+            let originalPayload
+            let actualPayload
             try{
-                payload=JSON.stringify(tx.payload.data.actions[0].payload.action.proposal_response_payload.extension.response.payload)
+                originalPayload = tx.payload.data.actions[0].payload.action.proposal_response_payload.extension.response.payload
+                actualPayload = helper.getUUIDFromPayload(originalPayload)
             } catch(err) {
+                originalPayload = ""
+                actualPayload = ""
             }
 
             yield sql.saveRow('transaction',
@@ -139,14 +132,37 @@ function* saveBlockRange(channelName, start, end) {
                     'status': status,
                     'creator_msp_id': tx.payload.header.signature_header.creator.Mspid,
                     'endorser_msp_id': mspId,
-                    'chaincode_id': chaincodeID || "None",
+                    'chaincode_id': chaincodeID,
                     'type': tx.payload.header.channel_header.typeString,
-                    'payload': payload || "None",
-                    'read_set': JSON.stringify(readSet),
-                    'write_set': JSON.stringify(writeSet)
+                    'payload': actualPayload
                 })
 
             yield sql.updateBySql(`update chaincodes set txcount =txcount+1 where name = '${chaincode}' and channelname='${channelName}' `)
+
+            if (actualPayload) {
+                // Storing of the transaction as new record or update record depends on the transacton body here.
+                var row = yield sql.getRowByPkOne(`select * from uuid where id='${actualPayload}'`)
+
+                if (row && row.id == actualPayload){
+                    // update the UUID row with the response.
+
+                    var respayload = "Hello"
+                    var rescreatedt = new Date(tx.payload.header.channel_header.timestamp).toISOString()
+
+                    yield sql.updateBySql(`update uuid set respayload='${respayload}', rescreatedt='${rescreatedt}' where id='${actualPayload}' returning *`)
+
+                } else {
+                    // create a new row as it is being seen for the first time.
+                    yield sql.saveRow('uuid',
+                        {
+                            'id': actualPayload,
+                            'reqcreatedt': new Date(tx.payload.header.channel_header.timestamp),
+                            'respayload': "",
+                            "rescreatedt": new Date()
+                        })
+                }
+
+            }
         }
 
     }
@@ -179,7 +195,7 @@ function getCurBlockNum(channelName) {
 
 // ====================chaincodes=====================================
 function* saveChaincodes(channelName) {
-    let chaincodes = yield query.getInstalledChaincodes(peer, channelName, 'instantiated', org)
+    let chaincodes = yield query.getInstalledChaincodes(peer, channelName, 'installed', org)
     let len = chaincodes.length
     if (typeof chaincodes === 'string') {
         logger.debug(chaincodes)
@@ -187,8 +203,13 @@ function* saveChaincodes(channelName) {
     }
     for (let i = 0; i < len; i++) {
         let chaincode = chaincodes[i]
-        chaincode.channelname = channelName
-        let c = yield sql.getRowByPkOne(`select count(1) as c from chaincodes where name='${chaincode.name}' and version='${chaincode.version}' and path='${chaincode.path}' and channelname='${channelName}' `)
+        if (chaincode.name.indexOf("exchange") >= 0) {
+            chaincode.channelname = 'exchange-channel'
+        } else {
+            chaincode.channelname = 'private-channel'
+        }
+        // chaincode.channelname = channelName
+        let c = yield sql.getRowByPkOne(`select count(1) as c from chaincodes where name='${chaincode.name}' and version='${chaincode.version}' and path='${chaincode.path}' `)
         if (c.c == 0) {
             yield sql.saveRow('chaincodes', chaincode)
         }
