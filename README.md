@@ -94,7 +94,8 @@ bcmanager$ docker build -t distributedid/explorer -f ./docker/Dockerfile.explore
 
 Steps:
 
-Note: run within the __bcmanager__ repository
+#Phase 1:
+Note: Run within the __bcmanager__ repository
 
 1. To run the `diid.network`. Enter the commands separately:
 
@@ -111,7 +112,8 @@ bcmanager$ make sendIdentity sendEvent
 bcmanager$ make queryID
 ```
 
-Note: open a new window and run in the __bcmanager__ repository
+#Phase 2:
+Note: Open a new window and run in the __bcmanager__ repository
 
 1. Navigate to the root directory of the `postgres` image by entering:
 (This will take you to the root of the `docker-compose.yml` file, which contains the image)
@@ -126,7 +128,8 @@ cd /github.com/distributedID/bcmanager/docker/explorer
 bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
 ```
 
-Note: open a new window and run within the __blockchain-explorer__ repository
+#Phase 3:
+Note: Open a new window and run within the __blockchain-explorer__ repository. These install commands must be run when a new branch is started or a navigated to.
 
 1. Install the required packages in the blockchain-explorer repository. By executing the following commands:
 
@@ -137,7 +140,8 @@ blockchain-explorer$ npm install
 blockchain-explorer/client$ npm install
 ```
 
-Note: open a new window and run within the __blockchain-explorer__ repository
+#Phase 4:
+Note: Open a new window and run within the __blockchain-explorer__ repository
 
 1. Use the following commands to launch the `explorer` network:
 
@@ -147,7 +151,7 @@ blockchain-explorer/client$ npm run build
 ```
 blockchain-explorer$ npm start
 ```
-Note: If editing the source code, the two commands above must be rerun to compile any changes made. If this is not done the explorer will not display any changes!
+Note: If editing the source code, the two commands above must be re-run to compile any changes made. If this is not done the explorer will not display any changes!
 
 1. Open the web-browser and access the `explorer` at `http://localhost:11000` .
 
@@ -180,7 +184,7 @@ Note: In the first window where the `diid.network` network was ran.
 bcmanager$ make stopEnv
 ```
 
-Note: These commands need to be preformed to properly tear down the networks so that they can be built in the future.
+Note: These commands need to be preformed to properly tear down the networks so that they can be built in the future. Many problems can occur if these commands are not preformed.
 
 
 ## Troubleshooting:
