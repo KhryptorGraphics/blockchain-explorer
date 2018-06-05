@@ -3,6 +3,77 @@ Hyperledger Explorer
 
 Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, open source browser for viewing activity on the underlying blockchain network.
 
+## Directory Structure
+```
+├── app            Application backend root
+	├── db			   Postgres script and help class
+	├── listener       Websocket listener
+	├── metrics        Metrics
+	├── mock_server	   Mock server used for development
+	├── service        The service
+	├── socket		   Push real time data to front end
+	├── test		   Endpoint tests
+	├── timer          Timer to post information periodically
+	└── utils          Various utility scripts
+├── client          Web Ui
+
+```
+
+## Requirements
+
+Following are the software dependencies required to install and run hyperledger explorer
+* nodejs 6.9.x (Note that v7.x is not yet supported)
+* PostgreSQL 9.5 or greater
+
+Hyperledger Explorer works with Hyperledger Fabric 1.0.  Install the following software dependencies to manage fabric network.
+* docker 17.06.2-ce [https://www.docker.com/community-edition]
+* docker-compose 1.14.0 [https://docs.docker.com/compose/]
+
+## Clone Repository
+
+1. Clone the `blockchain-explorer` repository into your local DistributedID folder. To get the latest version use the following command:
+
+```
+git clone https://github.com/distributedID/blockchain-explorer
+```
+
+1. Navigate to the `blockchain-explorer` repository using the following command:
+
+```
+cd blockchain-explorer
+```
+
+## Database setup
+
+1. Connect to PostgreSQL database by entering the following command:
+
+```
+sudo -u postgres psql
+```
+
+1. Run create database script by entering the following commands:
+
+```
+\i app/db/explorerpg.sql
+```
+```
+\i app/db/updatepg.sql
+
+```
+
+1. Run db status commands by entering the following commands:
+
+```
+\l
+```
+Note: view created fabricexplorer database
+
+```
+\d
+```
+Note: view created tables
+
+
 ## Building the required Docker Images
 
 We need to build two images to properly use the `explorer`:
@@ -57,7 +128,7 @@ bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
 
 Note: open a new window and run within the __blockchain-explorer__ repository
 
-1. Install the required packages in the blockchain-explorer repository:
+1. Install the required packages in the blockchain-explorer repository. By executing the following commands:
 
 ```
 blockchain-explorer$ npm install
@@ -65,23 +136,25 @@ blockchain-explorer$ npm install
 ```
 blockchain-explorer/client$ npm install
 ```
+
+Note: open a new window and run within the __blockchain-explorer__ repository
+
+1. Use the following commands to launch the `explorer` network:
+
 ```
 blockchain-explorer/client$ npm run build
 ```
-
-1. Use the command to launch the `explorer` and run this command in a separate
-window in the `blockchain-explorer` repository:
-
 ```
 blockchain-explorer$ npm start
 ```
+Note: If editing the source code, the two commands above must be rerun to compile any changes made. If this is not done the explorer will not display any changes!
 
 1. Open the web-browser and access the `explorer` at `http://localhost:11000` .
 
 
 ## How to stop it?
 
-Note: In the last window where the `blockchain-explorer` network was started.
+Note: In the last window where the `explorer` network was started.
 
 1. Tear down the network by entering the following command:
 ```
@@ -110,108 +183,14 @@ bcmanager$ make stopEnv
 Note: These commands need to be preformed to properly tear down the networks so that they can be built in the future.
 
 
-## Directory Structure
-```
-├── app            Application backend root
-	├── db			   Postgres script and help class
-	├── listener       Websocket listener
-	├── metrics        Metrics
-	├── mock_server	   Mock server used for development
-	├── service        The service
-	├── socket		   Push real time data to front end
-	├── test		   Endpoint tests
-	├── timer          Timer to post information periodically
-	└── utils          Various utility scripts
-├── client          Web Ui
+## Troubleshooting:
+Common problems experienced and easy solutions:
 
+1. Ran into the problem `Error: listen EADDRINUSE :::11000`? Solution:
+```
+Run the commands explained in the 'How to stop it?' section
 ```
 
-
-## Requirements
-
-Following are the software dependencies required to install and run hyperledger explorer
-* nodejs 6.9.x (Note that v7.x is not yet supported)
-* PostgreSQL 9.5 or greater
-
-Hyperledger Explorer works with Hyperledger Fabric 1.0.  Install the following software dependencies to manage fabric network.
-* docker 17.06.2-ce [https://www.docker.com/community-edition]
-* docker-compose 1.14.0 [https://docs.docker.com/compose/]
-
-## Clone Repository
-
-Clone this repository to get the latest using the following command.
-
-- `git clone https://github.com/hyperledger/blockchain-explorer.git`.
-- `cd blockchain-explorer`.
-
-## Database setup
-
-Connect to PostgreSQL database.
-
-- `sudo -u postgres psql`
-
-Run create database script.
-
-- `\i app/db/explorerpg.sql`
-- `\i app/db/updatepg.sql`
-
-Run db status commands.
-
-- `\l` view created fabricexplorer database
-- `\d` view created tables
-
-## Fabric network setup
-
- Setup your own network using [Build your network](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html) tutorial from Fabric. Once you setup the network, please modify the values in `config.json` accordingly.
-
-## Running hyperledger-explorer
-
-On another terminal.
-
-- `cd blockchain-explorer`
-- Modify config.json to update network-config.
-	- Change "fabric-path" to your fabric network path,
-	example: "/home/user1/workspace/fabric-samples" for the following keys: "tls_cacerts", "key", "cert".
-	- Final path for key "tls_cacerts" will be:  "/home/user1/workspace/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt".
-
-- Modify config.json to update one of the channel
-	- pg host, username, password details.
-```json
- "channel": "mychannel",
- "pg": {
-		"host": "127.0.0.1",
-		"port": "5432",
-		"database": "fabricexplorer",
-		"username": "hppoc",
-		"passwd": "password"
-	}
-```
-
-If you are connecting to a non TLS fabric peer, please modify the
-protocol (`grpcs->grpc`) and port (`9051-> 9050`) in the peer url and remove the `tls_cacerts`. Depending on this key, the application decides whether to go TLS or non TLS route.
-
-## Build Hyperledger Explorer
-
-On another terminal.
-
-- `cd blockchain-explorer/app/test`
-- `npm install`
-- `npm run test`
-- `cd blockchain-explorer`
-- `npm install`
-- `cd client/`
-- `npm install`
-- `npm test -- -u --coverage`
-- `npm run build`
-
-## Run Hyperledger Explorer
-
-From new terminal.
-
-- `cd blockchain-explorer/`
-- `./start.sh`  (it will have the backend up).
-- `tail -f log.log` (view log)
-- Launch the URL http://localhost:8080 on a browser.
 
 ## License
 
