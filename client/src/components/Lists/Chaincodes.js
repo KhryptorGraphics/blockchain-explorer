@@ -59,20 +59,6 @@ class Chaincodes extends Component {
               filterMethod: (filter, rows) =>
               matchSorter(rows, filter.value, { keys: ["path"] }, { threshold: matchSorter.rankings.SIMPLEMATCH }),
             filterAll: true
-            },
-            {
-              Header: "Transaction Count",
-              accessor: "txCount",
-              filterMethod: (filter, rows) =>
-              matchSorter(rows, filter.value, { keys: ["txCount"] }, { threshold: matchSorter.rankings.SIMPLEMATCH }),
-            filterAll: true
-            },
-            {
-              Header: "Version",
-              accessor: "version",
-              filterMethod: (filter, rows) =>
-              matchSorter(rows, filter.value, { keys: ["version"] }, { threshold: matchSorter.rankings.SIMPLEMATCH }),
-            filterAll: true
             }
           ];
 
