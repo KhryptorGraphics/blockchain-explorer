@@ -9,8 +9,6 @@ import TransactionView from '../View/TransactionView';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import matchSorter from 'match-sorter';
-// import {NotificationContainer, NotificationManager} from 'react-notifications';
-import Notifications from '../ReactNotifications';
 
 class Blocks extends React.Component {
     constructor(props) {
@@ -57,9 +55,6 @@ class Blocks extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({ totalBlocks: this.props.countHeader.latestBlock });
-        if (this.state.blockHeight != this.props.blockList.length) {
-            this.setState({ type: "info" });
-        }
     }
 
     componentDidMount() {
@@ -127,10 +122,6 @@ class Blocks extends React.Component {
 
         return (
             <div className="blockPage">
-                <div className="producerlabel">
-                    <Notifications type={this.state.type}/>
-                </div>
-
                 <Container>
                     <Row>
                         <Col >
