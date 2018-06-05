@@ -74,46 +74,13 @@ class TransactionView extends Component {
                     <DialogTitle>Transaction Detail</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-
                             <b>Tx:</b>{this.props.transaction.txhash} <br />
                             <b>Creator MSP:</b> {this.props.transaction.creator_msp_id} <br />
                             <b>Endorser:</b> {this.props.transaction.endorser_msp_id} <br />
                             <b>Chaincode Name:</b> {this.props.transaction.chaincode_id} <br />
                             <b>Type:</b> {this.props.transaction.type} <br />
                             <b>Payload:</b> { this.props.transaction.payload }<br />
-                            <b>Time:</b> {moment(this.props.transaction.createdt).tz(moment.tz.guess()).format("M-D-YYYY h:mm A zz")} <br />
-                            <b>Reads:</b>
-                             <ul>
-                                {this.props.transaction.read_set.map(function (item) {
-
-                                    return item === null ? '' :
-                                        <li><Typography variant="subheading"> {item.chaincode}</Typography>
-                                            <ul>{item.set.map(function (x) {
-                                                var block_num = '';
-                                                var tx_num = '';
-                                                if (x.version !== null) {
-                                                    block_num = x.version.block_num;
-                                                    tx_num = x.version.tx_num;
-                                                }
-                                                return x === null ? '' : <li>key:{x.key} ,version:( block:{block_num},tx:{tx_num})  </li>
-                                            })}</ul>
-                                            <br />
-                                        </li>;
-                                })}
-                            </ul>
-                            <b>Writes:</b>
-                            <ul>
-                                {this.props.transaction.write_set.map(function (item) {
-
-                                    return item === null ? '' :
-                                        <li><Typography variant="subheading"> {item.chaincode}</Typography>
-                                            <ul>{item.set.map(function (x) {
-                                                return x === null ? '' : <li>key:{x.key} ,is_delete:{x.is_delete.toString()},value:{x.value}  </li>
-                                            })}</ul>
-                                            <br />
-                                        </li>;
-                                })}
-                            </ul>
+                            <b>Time:</b> {moment(this.props.transaction.createdt).tz(moment.tz.guess()).format("YYYY-MM-DD HH:mm")} <br />
                         </DialogContentText>
                     </DialogContent>
                 </div>
