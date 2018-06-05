@@ -95,6 +95,7 @@ bcmanager$ docker build -t distributedid/explorer -f ./docker/Dockerfile.explore
 Steps:
 
 #Phase 1:
+
 Note: Run within the __bcmanager__ repository
 
 1. To run the `diid.network`. Enter the commands separately:
@@ -113,6 +114,7 @@ bcmanager$ make queryID
 ```
 
 #Phase 2:
+
 Note: Open a new window and run in the __bcmanager__ repository
 
 1. Navigate to the root directory of the `postgres` image by entering:
@@ -129,6 +131,7 @@ bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
 ```
 
 #Phase 3:
+
 Note: Open a new window and run within the __blockchain-explorer__ repository. These install commands must be run when a new branch is started or a navigated to.
 
 1. Install the required packages in the blockchain-explorer repository. By executing the following commands:
@@ -141,6 +144,7 @@ blockchain-explorer/client$ npm install
 ```
 
 #Phase 4:
+
 Note: Open a new window and run within the __blockchain-explorer__ repository
 
 1. Use the following commands to launch the `explorer` network:
