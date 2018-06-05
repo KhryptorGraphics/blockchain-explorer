@@ -64,7 +64,6 @@ class MenuBar extends Component {
     this.handleClickPeerView = this.handleClickPeerView.bind(this);
     this.handleClickDashboardView = this.handleClickDashboardView.bind(this);
     this.handleClickMatchedUUIDView = this.handleClickMatchedUUIDView.bind(this);
-    //this.displayNotifFunc = this.displayNotifFunc.bind(this);
   }
 
   componentWillMount() {
@@ -87,10 +86,6 @@ class MenuBar extends Component {
         this.setState({ uuidHeight: this.props.uuidList.length });
     }
   }
-
-  // displayNotifFunc(value) {
-  //     this.setState({ displayNotif: value });
-  // }
 
   componentDidMount() {
 
