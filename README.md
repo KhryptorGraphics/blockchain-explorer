@@ -5,25 +5,21 @@ Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, op
 
 ## Building the required Docker Images
 
-We need the following images to be built to use the `explorer`:
+We need to build two images to properly use the `explorer`:
 
-1. `distributedid/postgres`
-
-This can be done by executing the following command inside the `bcmanager`:
+1. Build the postgres image, located at `distributedid/postgres`. To build this image enter the following command:
 
 ```
 bcmanager$ docker build -t distributedid/postgres -f ./docker/Dockerfile.postgres .
 ```
 
-1. `distributedid/explorer`
-
-This can be done by executing the command inside the `bcmanager`:
+1.  Build the explorer image, located at `distributedid/explorer`. To build this image enter the following command:
 
 ```
 bcmanager$ docker build -t distributedid/explorer -f ./docker/Dockerfile.explorer .
 ```
 
-## How to run it ?
+## How to start/run the networks?
 
 Steps:
 
@@ -44,7 +40,7 @@ bcmanager$ make sendIdentity sendEvent
 bcmanager$ make queryID
 ```
 
-Note: run in a new window - still in the __bcmanager__ repository
+Note: open a new window and run in the __bcmanager__ repository
 
 1. Navigate to the root directory of the `postgres` image by entering:
 (This will take you to the root of the `docker-compose.yml` file, which contains the image)
@@ -59,13 +55,17 @@ cd /github.com/distributedID/bcmanager/docker/explorer
 bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
 ```
 
-Note: run within a new window within the __blockchain-explorer__ repository
+Note: open a new window and run within the __blockchain-explorer__ repository
 
 1. Install the required packages in the blockchain-explorer repository:
 
 ```
 blockchain-explorer$ npm install
+```
+```
 blockchain-explorer/client$ npm install
+```
+```
 blockchain-explorer/client$ npm run build
 ```
 
@@ -94,6 +94,9 @@ Note: In the window where the `postgres` image was built.
 
 ```
 bcmanager/docker/explorer$ ^C (Ctrl-C)
+```
+```
+bcmanager/docker/explorer$ docker-compose down
 ```
 
 Note: In the first window where the `diid.network` network was ran.
