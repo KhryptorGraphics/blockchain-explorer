@@ -94,7 +94,7 @@ bcmanager$ docker build -t distributedid/explorer -f ./docker/Dockerfile.explore
 
 Steps:
 
-#Phase 1:
+###Phase 1:###
 
 Note: Run within the __bcmanager__ repository
 
@@ -113,7 +113,7 @@ bcmanager$ make sendIdentity sendEvent
 bcmanager$ make queryID
 ```
 
-#Phase 2:
+####Phase 2:###
 
 Note: Open a new window and run in the __bcmanager__ repository
 
@@ -130,7 +130,7 @@ cd /github.com/distributedID/bcmanager/docker/explorer
 bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
 ```
 
-#Phase 3:
+###Phase 3:###
 
 Note: Open a new window and run within the __blockchain-explorer__ repository. These install commands must be run when a new branch is started or a navigated to.
 
@@ -143,7 +143,7 @@ blockchain-explorer$ npm install
 blockchain-explorer/client$ npm install
 ```
 
-#Phase 4:
+###Phase 4:###
 
 Note: Open a new window and run within the __blockchain-explorer__ repository
 
