@@ -55,15 +55,15 @@ We need to build two images to properly use the `explorer`:
 1. Build the postgres image, located at `distributedid/postgres`. To build this image enter the following command:
 
 ```
-bcmanager$ docker build -t distributedid/postgres-provider -f ./docker/Dockerfile.postgres .
 bcmanager$ docker build -t distributedid/postgres-consumer -f ./docker/Dockerfile.postgres .
-
 ```
 
 1.  Build the explorer image, located at `distributedid/explorer`. To build this image enter the following command:
 
 ```
 bcmanager$ docker build --build-arg REACT_APP_CLIENT=Provider -t distributedid/explorer-provider -f ./docker/Dockerfile.explorer .
+```
+```
 bcmanager$ docker build --build-arg REACT_APP_CLIENT=Consumer -t distributedid/explorer-consumer -f ./docker/Dockerfile.explorer .
 
 ```
@@ -126,6 +126,7 @@ blockchain-explorer/client$ npm install
 Note: Open a new window and run within the __blockchain-explorer__ repository
 
 1. Use the following commands to launch the `explorer` network:
+
 Note: To launch and view `Provider` UI run command:
 ```
 blockchain-explorer/client$ REACT_APP_CLIENT=Producer npm run build
@@ -138,7 +139,7 @@ blockchain-explorer/client$ REACT_APP_CLIENT=Consumer npm run build
 ```
 blockchain-explorer$ npm start
 ```
-Note:
+
 
 1. The `blockchain-explorer` runs with the `Provider` as default. To run it as a consumer, one can change the `config.json`'s `client` configuration to:
 ```
