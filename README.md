@@ -16,10 +16,10 @@ Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, op
 	├── timer          Timer to post information periodically
 	└── utils          Various utility scripts
 ├── client          Web Ui
-	├── build       	Build
+	├── build         Build
 	├── node_modules    Node Modules
-	├── public	Holds the files for the tab bar
-	└── src          	Source Files
+	├── public	  Holds the files for the tab bar
+	└── src            Source Files
 
 
 ```
@@ -47,37 +47,6 @@ git clone https://github.com/distributedID/blockchain-explorer
 ```
 cd blockchain-explorer
 ```
-
-## Database setup
-
-1. Connect to PostgreSQL database by entering the following command:
-
-```
-sudo -u postgres psql
-```
-
-1. Run create database script by entering the following commands:
-
-```
-\i app/db/explorerpg.sql
-```
-```
-\i app/db/updatepg.sql
-
-```
-
-1. Run db status commands by entering the following commands:
-
-```
-\l
-```
-Note: view created fabricexplorer database
-
-```
-\d
-```
-Note: view created tables
-
 
 ## Building the required Docker Images
 
