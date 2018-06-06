@@ -94,7 +94,9 @@ bcmanager$ docker build -t distributedid/postgres-consumer -f ./docker/Dockerfil
 1.  Build the explorer image, located at `distributedid/explorer`. To build this image enter the following command:
 
 ```
-bcmanager$ docker build -t distributedid/explorer -f ./docker/Dockerfile.explorer .
+bcmanager$ docker build --build-arg REACT_APP_CLIENT=Provider -t distributedid/explorer-provider -f ./docker/Dockerfile.explorer .
+bcmanager$ docker build --build-arg REACT_APP_CLIENT=Consumer -t distributedid/explorer-consumer -f ./docker/Dockerfile.explorer .
+
 ```
 
 ## How to start it?
