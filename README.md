@@ -42,7 +42,7 @@ Hyperledger Explorer works with Hyperledger Fabric 1.0.  Install the following s
 git clone https://github.com/distributedID/blockchain-explorer
 ```
 
-1. Navigate to the `blockchain-explorer` repository using the following command:
+2. Navigate to the `blockchain-explorer` repository using the following command:
 
 ```
 cd blockchain-explorer
@@ -58,7 +58,7 @@ We need to build two images to properly use the `explorer`:
 bcmanager$ docker build -t distributedid/postgres-consumer -f ./docker/Dockerfile.postgres .
 ```
 
-1.  Build the explorer image, located at `distributedid/explorer`. To build this image enter the following command:
+2.  Build the explorer image, located at `distributedid/explorer`. To build this image enter the following command:
 
 ```
 bcmanager$ docker build --build-arg REACT_APP_CLIENT=Provider -t distributedid/explorer-provider -f ./docker/Dockerfile.explorer .
@@ -102,7 +102,7 @@ Note: Open a new window and run in the __bcmanager__ repository
 cd /github.com/distributedID/bcmanager/docker/explorer
 ```
 
-1. Use the command to launch the `postgres` image (only for the Provider):
+2. Use the command to launch the `postgres` image (only for the Provider):
 
 ```
 bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
@@ -141,7 +141,7 @@ blockchain-explorer$ npm start
 ```
 
 
-1. The `blockchain-explorer` runs with the `Provider` as default. To run it as a consumer, one can change the `config.json`'s `client` configuration to:
+2. The `blockchain-explorer` runs with the `Provider` as default. To run it as a consumer, one can change the `config.json`'s `client` configuration to:
 ```
 {
 	...
@@ -150,7 +150,7 @@ blockchain-explorer$ npm start
 }
 ```
 
-1. If editing the source code, the two commands above must be re-run to compile any changes made. If this is not done the explorer will not display any changes!
+Note: If editing the source code, the two commands above must be re-run to compile any changes made. If this is not done the explorer will not display any changes!
 
 ### Access the GUI
 
@@ -168,7 +168,7 @@ blockchain-explorer$ ^C (Ctrl-C)
 
 Note: In the window where the `postgres` image was built.
 
-1. Tear down the image by entering the following command:
+2. Tear down the image by entering the following command:
 
 ```
 bcmanager/docker/explorer$ ^C (Ctrl-C)
@@ -179,7 +179,7 @@ bcmanager/docker/explorer$ docker-compose down
 
 Note: In the first window where the `diid.network` network was ran.
 
-1. Tear down the network by entering:
+3. Tear down the network by entering:
 
 ```
 bcmanager$ make stopEnv
