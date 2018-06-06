@@ -161,7 +161,7 @@ Note: To launch and view `Provider` UI run command:
 ```
 blockchain-explorer/client$ REACT_APP_CLIENT=Producer npm run build
 ```
-Note: To launch and view `Consumer` UI run command: 
+Note: To launch and view `Consumer` UI run command:
 ```
 blockchain-explorer/client$ REACT_APP_CLIENT=Consumer npm run build
 ```
@@ -169,7 +169,20 @@ blockchain-explorer/client$ REACT_APP_CLIENT=Consumer npm run build
 ```
 blockchain-explorer$ npm start
 ```
-Note: If editing the source code, the two commands above must be re-run to compile any changes made. If this is not done the explorer will not display any changes!
+Note:
+
+1. The `blockchain-explorer` runs with the `Provider` as default. To run it as a consumer, one can change the `config.json`'s `client` configuration to:
+```
+{
+	...
+	"client": "Consumer"
+	...
+}
+```
+
+1. If editing the source code, the two commands above must be re-run to compile any changes made. If this is not done the explorer will not display any changes!
+
+### Access the GUI
 
 1. Open the web-browser and access the `explorer` at `http://localhost:11000` .
 
