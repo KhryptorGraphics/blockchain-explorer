@@ -127,13 +127,13 @@ bcmanager$ make queryID
 Note: Open a new window and run in the __bcmanager__ repository
 
 1. Navigate to the root directory of the `postgres` image by entering:
-(This will take you to the root of the `docker-compose.yml` file, which contains the image)
+(This will take you to the root of the `docker-compose.yml` file, which contains the docker-compose file)
 
 ```
 cd /github.com/distributedID/bcmanager/docker/explorer
 ```
 
-1. Use the command to launch the `postgres` image:
+1. Use the command to launch the `postgres` image (only for the Provider):
 
 ```
 bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
