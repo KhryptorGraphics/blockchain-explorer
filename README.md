@@ -6,20 +6,20 @@ Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, op
 ## Directory Structure
 ```
 ├── app            Application backend root
-	├── db		Postgres script and help class
+	├── db			Postgres script and help class
 	├── listener       Websocket listener
 	├── metrics        Metrics
 	├── mock_server	   Mock server used for development
 	├── service        The service
-	├── socket	 Push real time data to front end
-	├── test	 Endpoint tests
+	├── socket		Push real time data to front end
+	├── test	 	Endpoint tests
 	├── timer          Timer to post information periodically
 	└── utils          Various utility scripts
 ├── client          Web Ui
-	├── build       Build
+	├── build       	Build
 	├── node_modules    Node Modules
-	├── public	   Holds the files for the tab bar
-	└── src          Source Files
+	├── public	   	Holds the files for the tab bar
+	└── src          	Source Files
 
 
 ```
