@@ -11,8 +11,8 @@ Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, op
 	├── metrics        Metrics
 	├── mock_server	   Mock server used for development
 	├── service        The service
-	├── socket	Push real time data to front end
-	├── test	Endpoint tests
+	├── socket	  Push real time data to front end
+	├── test	  Endpoint tests
 	├── timer          Timer to post information periodically
 	└── utils          Various utility scripts
 ├── client          Web Ui
