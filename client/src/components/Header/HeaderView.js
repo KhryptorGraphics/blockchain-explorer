@@ -135,7 +135,7 @@ class HeaderView extends Component {
           {/* <NavbarBrand href="/"> HYPERLEDGER EXPLORER</NavbarBrand> */}
           <NavbarToggler onClick={this.toggle} />
           <div className="providerlabel">
-              <h1>Provider</h1>
+              <h1>{ process.env.REACT_APP_CLIENT }</h1>
           </div>
           <Nav className="ml-auto" navbar>
             <div className='channel-dropdown'>

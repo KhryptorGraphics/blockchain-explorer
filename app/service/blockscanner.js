@@ -27,6 +27,11 @@ var blockListener
 
 var networkConfig = config["network-config"];
 var org = Object.keys(networkConfig)[0];
+if (config["client"] == "Consumer") {
+    org = Object.keys(networkConfig)[1];
+}
+
+console.log(org);
 var orgObj = config["network-config"][org];
 var orgKey = Object.keys(orgObj);
 var index = orgKey.indexOf("peer1");
