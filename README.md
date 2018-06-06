@@ -6,19 +6,23 @@ Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, op
 ## Directory Structure
 ```
 ├── app            Application backend root
-	├── db			   Postgres script and help class
+	├── db		   Postgres script and help class
 	├── listener       Websocket listener
 	├── metrics        Metrics
 	├── mock_server	   Mock server used for development
 	├── service        The service
-	├── socket		   Push real time data to front end
-	├── test		   Endpoint tests
+	├── socket	   Push real time data to front end
+	├── test	   Endpoint tests
 	├── timer          Timer to post information periodically
 	└── utils          Various utility scripts
 ├── client          Web Ui
+	├── build           Build
+	├── node_modules    Node Modules
+	├── public	    Holds the files for the tab bar
+	└── src             Source Files
+
 
 ```
-
 
 ## Requirements
 
@@ -32,79 +36,166 @@ Hyperledger Explorer works with Hyperledger Fabric 1.0.  Install the following s
 
 ## Clone Repository
 
-Clone this repository to get the latest using the following command.
+1. Clone the `blockchain-explorer` repository into your local DistributedID folder. To get the latest version use the following command:
 
-- `git clone https://github.com/hyperledger/blockchain-explorer.git`.
-- `cd blockchain-explorer`.
-
-## Database setup
-
-Connect to PostgreSQL database.
-
-- `sudo -u postgres psql`
-
-Run create database script.
-
-- `\i app/db/explorerpg.sql`
-- `\i app/db/updatepg.sql`
-
-Run db status commands.
-
-- `\l` view created fabricexplorer database
-- `\d` view created tables
-
-## Fabric network setup
-
- Setup your own network using [Build your network](http://hyperledger-fabric.readthedocs.io/en/latest/build_network.html) tutorial from Fabric. Once you setup the network, please modify the values in `config.json` accordingly.
-
-## Running hyperledger-explorer
-
-On another terminal.
-
-- `cd blockchain-explorer`
-- Modify config.json to update network-config.
-	- Change "fabric-path" to your fabric network path,
-	example: "/home/user1/workspace/fabric-samples" for the following keys: "tls_cacerts", "key", "cert".
-	- Final path for key "tls_cacerts" will be:  "/home/user1/workspace/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt".
-
-- Modify config.json to update one of the channel
-	- pg host, username, password details.
-```json
- "channel": "mychannel",
- "pg": {
-		"host": "127.0.0.1",
-		"port": "5432",
-		"database": "fabricexplorer",
-		"username": "hppoc",
-		"passwd": "password"
-	}
+```
+git clone https://github.com/distributedID/blockchain-explorer
 ```
 
-If you are connecting to a non TLS fabric peer, please modify the
-protocol (`grpcs->grpc`) and port (`9051-> 9050`) in the peer url and remove the `tls_cacerts`. Depending on this key, the application decides whether to go TLS or non TLS route.
+1. Navigate to the `blockchain-explorer` repository using the following command:
 
-## Build Hyperledger Explorer
+```
+cd blockchain-explorer
+```
 
-On another terminal.
+## Building the required Docker Images
 
-- `cd blockchain-explorer/app/test`
-- `npm install`
-- `npm run test`
-- `cd blockchain-explorer`
-- `npm install`
-- `cd client/`
-- `npm install`
-- `npm test -- -u --coverage`
-- `npm run build`
+We need to build two images to properly use the `explorer`:
 
-## Run Hyperledger Explorer
+1. Build the postgres image, located at `distributedid/postgres`. To build this image enter the following command:
 
-From new terminal.
+```
+bcmanager$ docker build -t distributedid/postgres-consumer -f ./docker/Dockerfile.postgres .
+```
 
-- `cd blockchain-explorer/`
-- `./start.sh`  (it will have the backend up).
-- `tail -f log.log` (view log)
-- Launch the URL http://localhost:8080 on a browser.
+1.  Build the explorer image, located at `distributedid/explorer`. To build this image enter the following command:
+
+```
+bcmanager$ docker build --build-arg REACT_APP_CLIENT=Provider -t distributedid/explorer-provider -f ./docker/Dockerfile.explorer .
+```
+```
+bcmanager$ docker build --build-arg REACT_APP_CLIENT=Consumer -t distributedid/explorer-consumer -f ./docker/Dockerfile.explorer .
+
+```
+
+## How to start it?
+
+Steps:
+
+### Window 1:
+
+Note: Run within the __bcmanager__ repository
+
+1. To run the `diid.network`. Enter the commands separately:
+
+```
+bcmanager$ make startEnv
+```
+```
+bcmanager$ make initExchChannel initPrivChannel
+```
+```
+bcmanager$ make sendIdentity sendEvent
+```
+```
+bcmanager$ make queryID
+```
+
+### Window 2:
+
+Note: Open a new window and run in the __bcmanager__ repository
+
+1. Navigate to the root directory of the `postgres` image by entering:
+(This will take you to the root of the `docker-compose.yml` file, which contains the docker-compose file)
+
+```
+cd /github.com/distributedID/bcmanager/docker/explorer
+```
+
+1. Use the command to launch the `postgres` image (only for the Provider):
+
+```
+bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
+```
+
+### Window 3:
+
+Note: Open a new window and run within the __blockchain-explorer__ repository. These install commands must be run when a new branch is started or a navigated to.
+
+1. Install the required packages in the blockchain-explorer repository. By executing the following commands:
+
+```
+blockchain-explorer$ npm install
+```
+```
+blockchain-explorer/client$ npm install
+```
+
+### Window 4:
+
+Note: Open a new window and run within the __blockchain-explorer__ repository
+
+1. Use the following commands to launch the `explorer` network:
+
+Note: To launch and view `Provider` UI run command:
+```
+blockchain-explorer/client$ REACT_APP_CLIENT=Producer npm run build
+```
+Note: To launch and view `Consumer` UI run command:
+```
+blockchain-explorer/client$ REACT_APP_CLIENT=Consumer npm run build
+```
+
+```
+blockchain-explorer$ npm start
+```
+
+
+1. The `blockchain-explorer` runs with the `Provider` as default. To run it as a consumer, one can change the `config.json`'s `client` configuration to:
+```
+{
+	...
+	"client": "Consumer"
+	...
+}
+```
+
+1. If editing the source code, the two commands above must be re-run to compile any changes made. If this is not done the explorer will not display any changes!
+
+### Access the GUI
+
+1. Open the web-browser and access the `explorer` at `http://localhost:11000` .
+
+
+## How to stop it?
+
+Note: In the last window where the `explorer` network was started.
+
+1. Tear down the network by entering the following command:
+```
+blockchain-explorer$ ^C (Ctrl-C)
+```
+
+Note: In the window where the `postgres` image was built.
+
+1. Tear down the image by entering the following command:
+
+```
+bcmanager/docker/explorer$ ^C (Ctrl-C)
+```
+```
+bcmanager/docker/explorer$ docker-compose down
+```
+
+Note: In the first window where the `diid.network` network was ran.
+
+1. Tear down the network by entering:
+
+```
+bcmanager$ make stopEnv
+```
+
+Note: These commands need to be preformed to properly tear down the networks so that they can be built in the future. Many problems can occur if these commands are not preformed.
+
+
+## Troubleshooting:
+Common problems experienced and easy solutions:
+
+1. Ran into the problem `Error: listen EADDRINUSE :::11000`? Solution:
+```
+Run the commands explained in the 'How to stop it?' section
+```
+
 
 ## License
 
