@@ -86,7 +86,9 @@ We need to build two images to properly use the `explorer`:
 1. Build the postgres image, located at `distributedid/postgres`. To build this image enter the following command:
 
 ```
-bcmanager$ docker build -t distributedid/postgres -f ./docker/Dockerfile.postgres .
+bcmanager$ docker build -t distributedid/postgres-provider -f ./docker/Dockerfile.postgres .
+bcmanager$ docker build -t distributedid/postgres-consumer -f ./docker/Dockerfile.postgres .
+
 ```
 
 1.  Build the explorer image, located at `distributedid/explorer`. To build this image enter the following command:
