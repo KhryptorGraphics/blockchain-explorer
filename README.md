@@ -6,7 +6,7 @@ Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, op
 ## Directory Structure
 ```
 ├── app            Application backend root
-	├── db		 Postgres script and help class
+	├── db		   Postgres script and help class
 	├── listener       Websocket listener
 	├── metrics        Metrics
 	├── mock_server	   Mock server used for development
@@ -16,10 +16,10 @@ Hyperledger Explorer is a simple, powerful, easy-to-use, highly maintainable, op
 	├── timer          Timer to post information periodically
 	└── utils          Various utility scripts
 ├── client          Web Ui
-	├── build       Build
+	├── build       	Build
 	├── node_modules    Node Modules
-	├── public		Holds the files for the tab bar
-	└── src          Source Files
+	├── public	Holds the files for the tab bar
+	└── src          	Source Files
 
 
 ```
@@ -153,10 +153,15 @@ blockchain-explorer/client$ npm install
 Note: Open a new window and run within the __blockchain-explorer__ repository
 
 1. Use the following commands to launch the `explorer` network:
+Note: To launch and view `Provider` UI run command:
+```
+blockchain-explorer/client$ REACT_APP_CLIENT=Producer npm run build
+```
+Note: To launch and view `Consumer` UI run command: 
+```
+blockchain-explorer/client$ REACT_APP_CLIENT=Consumer npm run build
+```
 
-```
-blockchain-explorer/client$ npm run build
-```
 ```
 blockchain-explorer$ npm start
 ```
