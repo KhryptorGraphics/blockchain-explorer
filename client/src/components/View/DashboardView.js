@@ -13,6 +13,7 @@ import { Card, Row, Col, CardBody } from 'reactstrap';
 import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/header/action-creators';
 import { getTxByOrg as getTxByOrgCreator} from '../../store/actions/charts/action-creators';
 import FontAwesome from 'react-fontawesome';
+
 class DashboardView extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +33,7 @@ class DashboardView extends Component {
                         <Card className="count-card dark-card">
                             <CardBody>
                                 <h1>{this.props.countHeader.countHeader.latestBlock}</h1>
-                                <h4> <FontAwesome name="cube" /> Blocks</h4>
+                                <h4> <FontAwesome name="cubes" /> Blocks</h4>
                             </CardBody>
                         </Card>
                         <Card className="count-card light-card" >
@@ -44,13 +45,13 @@ class DashboardView extends Component {
                         <Card className="count-card dark-card" >
                             <CardBody>
                                 <h1>{this.props.countHeader.countHeader.peerCount}</h1>
-                                <h4><FontAwesome name="users" />Nodes</h4>
+                                <h4><FontAwesome name="users" />  Nodes</h4>
                             </CardBody>
                         </Card>
                         <Card className="count-card light-card" >
                             <CardBody>
                                 <h1>{this.props.countHeader.countHeader.chaincodeCount}</h1>
-                                <h4><FontAwesome name="handshake-o" />Chaincodes</h4>
+                                <h4><FontAwesome name="handshake-o" />  Chaincodes</h4>
                             </CardBody>
                         </Card>
                     </Row>

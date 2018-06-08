@@ -22,6 +22,8 @@ import { getTransactionList as getTransactionListCreator } from '../../store/act
 import { getUUIDStatusRow as getUUIDStatusRowCreator } from '../../store/actions/matcheduuid/action-creators';
 import { getUUIDStatusList as getUUIDStatusListCreator } from '../../store/actions/matcheduuids/action-creators';
 import Notifications, { notify } from 'react-notify-toast';
+ import FontAwesome from 'react-fontawesome';
+// import { Card, Row, Col, CardBody } from 'reactstrap';
 
 import {
   Navbar,
@@ -75,7 +77,7 @@ class MenuBar extends Component {
       // console.log('nextProps.countHeader !== this.props.countHeader')
       this.setState({ countHeader: nextProps.countHeader });
     }
-
+    
     if (this.state.blockHeight != this.props.countHeader.latestBlock){
         let myColour = { background: '#29621e', text: "#ffffff" };
         notify.show('Block Added !!', "custom", 5000, myColour);
@@ -220,12 +222,12 @@ class MenuBar extends Component {
         <div className="menuItems">
           <Navbar color="faded" light expand="md" margin-left="0px">
             <Nav className="ml-auto" navbar>
-              <NavItem active={this.state.activeTab.dashboardTab} onClick={this.handleClickDashboardView}>DASHBOARD</NavItem>
+              {/* <NavItem active={this.state.activeTab.dashboardTab} onClick={this.handleClickDashboardView}>DASHBOARD</NavItem> */}
               <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>NETWORK</NavItem>
               <NavItem active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView}>BLOCKS</NavItem>
               <NavItem active={this.state.activeTab.txTab} onClick={this.handleClickTransactionView}>TRANSACTIONS</NavItem>
               <NavItem active={this.state.activeTab.chaincodesTab} onClick={this.handleClickChaincodeView }>CHAINCODES</NavItem>
-              <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }>UUID</NavItem>
+              <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }><FontAwesome name="user" />  UUID </NavItem>
             </Nav>
           </Navbar>
         </div>
@@ -235,7 +237,7 @@ class MenuBar extends Component {
         </div>
 
         <div className="producerlabel">
-            <Notifications />
+          <Notifications options={{ align: "left"}}/>
         </div>
 
 
