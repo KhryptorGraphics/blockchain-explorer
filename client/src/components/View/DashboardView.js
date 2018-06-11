@@ -13,9 +13,6 @@ import { Card, Row, Col, CardBody } from 'reactstrap';
 import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/header/action-creators';
 import { getTxByOrg as getTxByOrgCreator} from '../../store/actions/charts/action-creators';
 import FontAwesome from 'react-fontawesome';
-import {Button} from 'reactstrap'
-//import Notifications, { notify } from 'react-notify-toast';
-
 
 class DashboardView extends Component {
     constructor(props) {
@@ -31,6 +28,41 @@ class DashboardView extends Component {
     render() {
         return (
             <div className="dashboard" >
+                <div className="dash-stats">
+                    <Row>
+                        <Card className="count-card light-card">
+                            <CardBody>
+                                {/* <h1>{this.props.countHeader.countHeader.latestBlock}</h1> */}
+                                <h1> <FontAwesome name="connectdevelop" /> Network</h1>
+                            </CardBody>
+                        </Card>
+                        <Card className="count-card dark-card">
+                            <CardBody>
+                                {/* <h1>{this.props.countHeader.countHeader.latestBlock}</h1> */}
+                                <h1> <FontAwesome name="cubes" /> Blocks</h1>
+                            </CardBody>
+                        </Card>
+                        <Card className="count-card light-card" >
+                            <CardBody>
+                                {/* <h1>{this.props.countHeader.countHeader.txCount}</h1> */}
+                                <h1><FontAwesome name="list-alt" /> Transactions</h1>
+                            </CardBody>
+                        </Card>
+                        <Card className="count-card dark-card" >
+                            <CardBody>
+                                {/* <h1>{this.props.countHeader.countHeader.chaincodeCount}</h1> */}
+                                <h1><FontAwesome name="handshake-o" />  Chaincodes</h1>
+                            </CardBody>
+                        </Card>
+                        {/* CHANGE COUNT OF THIS */ }
+                        <Card className="count-card light-card" >
+                            <CardBody>
+                                {/* <h1>{this.props.countHeader.countHeader.chaincodeCount}</h1> */}
+                                <h1><FontAwesome name="user" />  UUID</h1>
+                            </CardBody>
+                        </Card>
+                    </Row>
+                </div>
                 <Row>
                     <Col lg="6">
                         <ChartStats />
