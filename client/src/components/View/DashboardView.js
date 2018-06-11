@@ -13,6 +13,7 @@ import { Card, Row, Col, CardBody } from 'reactstrap';
 import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/header/action-creators';
 import { getTxByOrg as getTxByOrgCreator} from '../../store/actions/charts/action-creators';
 import FontAwesome from 'react-fontawesome';
+
 class DashboardView extends Component {
     constructor(props) {
         super(props);
@@ -29,28 +30,35 @@ class DashboardView extends Component {
             <div className="dashboard" >
                 <div className="dash-stats">
                     <Row>
+                        <Card className="count-card light-card">
+                            <CardBody>
+                                {/* <h1>{this.props.countHeader.countHeader.latestBlock}</h1> */}
+                                <h1> <FontAwesome name="connectdevelop" /> Network</h1>
+                            </CardBody>
+                        </Card>
                         <Card className="count-card dark-card">
                             <CardBody>
-                                <h1>{this.props.countHeader.countHeader.latestBlock}</h1>
-                                <h4> <FontAwesome name="cube" /> Blocks</h4>
+                                {/* <h1>{this.props.countHeader.countHeader.latestBlock}</h1> */}
+                                <h1> <FontAwesome name="cubes" /> Blocks</h1>
                             </CardBody>
                         </Card>
                         <Card className="count-card light-card" >
                             <CardBody>
-                                <h1>{this.props.countHeader.countHeader.txCount}</h1>
-                                <h4><FontAwesome name="list-alt" /> Transactions</h4>
+                                {/* <h1>{this.props.countHeader.countHeader.txCount}</h1> */}
+                                <h1><FontAwesome name="list-alt" /> Transactions</h1>
                             </CardBody>
                         </Card>
                         <Card className="count-card dark-card" >
                             <CardBody>
-                                <h1>{this.props.countHeader.countHeader.peerCount}</h1>
-                                <h4><FontAwesome name="users" />Nodes</h4>
+                                {/* <h1>{this.props.countHeader.countHeader.chaincodeCount}</h1> */}
+                                <h1><FontAwesome name="handshake-o" />  Chaincodes</h1>
                             </CardBody>
                         </Card>
+                        {/* CHANGE COUNT OF THIS */ }
                         <Card className="count-card light-card" >
                             <CardBody>
-                                <h1>{this.props.countHeader.countHeader.chaincodeCount}</h1>
-                                <h4><FontAwesome name="handshake-o" />Chaincodes</h4>
+                                {/* <h1>{this.props.countHeader.countHeader.chaincodeCount}</h1> */}
+                                <h1><FontAwesome name="user" />  UUID</h1>
                             </CardBody>
                         </Card>
                     </Row>
@@ -71,7 +79,7 @@ class DashboardView extends Component {
                         <PeerGraph />
                     </Col>
                 </Row>
-            </div >
+            </div>
         );
     }
 }
