@@ -77,7 +77,7 @@ class MenuBar extends Component {
       // console.log('nextProps.countHeader !== this.props.countHeader')
       this.setState({ countHeader: nextProps.countHeader });
     }
-    
+
     if (this.state.blockHeight != this.props.countHeader.latestBlock){
         let myColour = { background: '#29621e', text: "#ffffff" };
         notify.show('Block Added !!', "custom", 5000, myColour);
@@ -240,7 +240,7 @@ class MenuBar extends Component {
           <Notifications options={{ align: "left"}}/>
         </div>
 
-
+=
       </div>
     );
   }
