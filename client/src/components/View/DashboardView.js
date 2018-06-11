@@ -14,7 +14,7 @@ import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/hea
 import { getTxByOrg as getTxByOrgCreator} from '../../store/actions/charts/action-creators';
 import FontAwesome from 'react-fontawesome';
 import {Button} from 'reactstrap'
-import Notifications, { notify } from 'react-notify-toast';
+//import Notifications, { notify } from 'react-notify-toast';
 
 
 class DashboardView extends Component {
@@ -31,46 +31,6 @@ class DashboardView extends Component {
     render() {
         return (
             <div className="dashboard" >
-                {/* <div className="producerlabel">
-                  <Notifications options={{ align: "left"}}/>
-                </div> */}
-                <div className="dash-stats">
-                    <Row>
-                        <Button>
-                            <Card className="count-card dark-card">
-                                <CardBody>
-                                    {/* <h1>{this.props.countHeader.countHeader.latestBlock}</h1> */}
-                                    <h4> <FontAwesome name="cubes" /> Blocks</h4>
-                                </CardBody>
-                            </Card>
-                        </Button>
-                        <Button>
-                            <Card className="count-card light-card" >
-                                <CardBody>
-                                    {/* <h1>{this.props.countHeader.countHeader.txCount}</h1> */}
-                                    <h4><FontAwesome name="list-alt" /> Transactions</h4>
-                                </CardBody>
-                            </Card>
-                        </Button>
-                        <Button clear={true}>
-                            <Card className="count-card dark-card" >
-                                <CardBody>
-                                    {/* <h1>{this.props.countHeader.countHeader.peerCount}</h1> */}
-                                    <h4><FontAwesome name="users" />  Nodes</h4>
-                                </CardBody>
-                            </Card>
-                        </Button>
-                         {/* onPress={}*/}
-                         <Button>
-                            <Card className="count-card light-card" >
-                                <CardBody>
-                                    {/* <h1>{this.props.countHeader.countHeader.chaincodeCount}</h1> */}
-                                    <h4><FontAwesome name="handshake-o" />  Chaincodes</h4>
-                                </CardBody>
-                            </Card>
-                         </Button>
-                    </Row>
-                </div>
                 <Row>
                     <Col lg="6">
                         <ChartStats />

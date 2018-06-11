@@ -22,8 +22,9 @@ import { getTransactionList as getTransactionListCreator } from '../../store/act
 import { getUUIDStatusRow as getUUIDStatusRowCreator } from '../../store/actions/matcheduuid/action-creators';
 import { getUUIDStatusList as getUUIDStatusListCreator } from '../../store/actions/matcheduuids/action-creators';
 import Notifications, { notify } from 'react-notify-toast';
- import FontAwesome from 'react-fontawesome';
-// import { Card, Row, Col, CardBody } from 'reactstrap';
+import FontAwesome from 'react-fontawesome';
+import { Card, Row, Col, CardBody } from 'reactstrap';
+import {Button} from 'reactstrap'
 
 import {
   Navbar,
@@ -223,16 +224,40 @@ class MenuBar extends Component {
           <Navbar color="faded" light expand="md" margin-left="0px">
             <Nav className="ml-auto" navbar>
               {/* <NavItem active={this.state.activeTab.dashboardTab} onClick={this.handleClickDashboardView}>DASHBOARD</NavItem> */}
-              <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>NETWORK</NavItem>
-              <NavItem active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView}>BLOCKS</NavItem>
-              <NavItem active={this.state.activeTab.txTab} onClick={this.handleClickTransactionView}>TRANSACTIONS</NavItem>
-              <NavItem active={this.state.activeTab.chaincodesTab} onClick={this.handleClickChaincodeView }>CHAINCODES</NavItem>
-              <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }><FontAwesome name="user" />  UUID </NavItem>
+              {/* <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>
+
+          </NavItem> */}
+              <NavItem active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView}>
+                  <Card className="count-card dark-card">
+               <CardBody>
+                   <h4> <FontAwesome name="cubes" /> Blocks</h4>
+               </CardBody>
+           </Card></NavItem>
+              <NavItem active={this.state.activeTab.txTab} onClick={this.handleClickTransactionView}>
+                  <Card className="count-card light-card" >
+                  <CardBody>
+                      <h4><FontAwesome name="list-alt" /> Transactions</h4>
+                  </CardBody>
+              </Card></NavItem>
+              <NavItem active={this.state.activeTab.chaincodesTab} onClick={this.handleClickChaincodeView }>
+                  <Card className="count-card light-card" >
+                  <CardBody>
+                      <h4><FontAwesome name="handshake-o" />  Chaincodes</h4>
+                  </CardBody>
+              </Card>
+          </NavItem>
+              <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }>
+                 <Card className="count-card dark-card" >
+                  <CardBody>
+                      <h4><FontAwesome name="users" />  UUID</h4>
+                  </CardBody>
+              </Card> </NavItem>
             </Nav>
           </Navbar>
         </div>
-
-        <div style={{ position: 'absolute', top: 140, left: 30, zIndex: 1000 }}>
+        <div className="dash-stats">
+        </div>
+        <div style={{ position: 'absolute', top: 300, left: 30, zIndex: 1000 }}>
           {currentView}
         </div>
 
@@ -240,7 +265,6 @@ class MenuBar extends Component {
           <Notifications options={{ align: "left"}}/>
         </div>
 
-=
       </div>
     );
   }
