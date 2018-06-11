@@ -4,9 +4,9 @@
 
 #root > div > div:nth-child(1) > nav > a
 {
-font-size: 30pt;
-/* margin-left: 670px; */
-font-weight: 300;
+    font-size: 30pt;
+    /* margin-left: 670px; */
+    font-weight: 300;
 }
 #root > div > div:nth-child(1) > nav{
     padding-top: 0px;
@@ -32,12 +32,7 @@ font-weight: 300;
  div.menuItems > nav > ul{
     margin-left: 160px!important;
 }
- div.menuItems > nav > ul > li{
-padding-left: 100px;
-padding-right:60px;
-font-size:16pt;
-color:#BFBFBF
-}
+
 .menuItems > nav > ul > li.active{
     color:#22313F;
     font-weight: bolder;
@@ -54,14 +49,12 @@ div.menuItems > nav{
 }
 /* Dashboard */
  .count-card{
-     min-width: 320px;
-     min-height: 100px;
-     padding-left: 5px;
-     margin-left: 5px;
+     min-width: 290px;
+     min-height: 35px;
      text-align: center;
  }
-.card-body > h1{
-    font-size: 25pt;
+.card-body > h4{
+    font-size: 20pt;
 }
  .dark-card{
      /* background-color:#BFBFBF; */

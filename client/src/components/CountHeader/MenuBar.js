@@ -221,48 +221,56 @@ class MenuBar extends Component {
     return (
       <div>
         <div className="menuItems">
-          <Navbar color="faded" light expand="md" margin-left="0px">
+          <Navbar color="faded" light expand="xs" margin-left="0px">
             <Nav className="ml-auto" navbar>
-              {/* <NavItem active={this.state.activeTab.dashboardTab} onClick={this.handleClickDashboardView}>DASHBOARD</NavItem> */}
-              {/* <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>
-
-          </NavItem> */}
-              <NavItem active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView}>
-                  <Card className="count-card dark-card">
-               <CardBody>
-                   <h4> <FontAwesome name="cubes" /> Blocks</h4>
-               </CardBody>
-           </Card></NavItem>
-              <NavItem active={this.state.activeTab.txTab} onClick={this.handleClickTransactionView}>
-                  <Card className="count-card light-card" >
-                  <CardBody>
-                      <h4><FontAwesome name="list-alt" /> Transactions</h4>
-                  </CardBody>
-              </Card></NavItem>
-              <NavItem active={this.state.activeTab.chaincodesTab} onClick={this.handleClickChaincodeView }>
-                  <Card className="count-card light-card" >
-                  <CardBody>
-                      <h4><FontAwesome name="handshake-o" />  Chaincodes</h4>
-                  </CardBody>
-              </Card>
-          </NavItem>
-              <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }>
-                 <Card className="count-card dark-card" >
-                  <CardBody>
-                      <h4><FontAwesome name="users" />  UUID</h4>
-                  </CardBody>
-              </Card> </NavItem>
+              <Row>
+                  <Col>
+                      <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>
+                          <Card body className="count-card light-card">
+                                  <h4> <FontAwesome name="connectdevelop" /> Network</h4>
+                          </Card>
+                      </NavItem>
+                  </Col>
+                  <Col>
+                      <NavItem active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView}>
+                          <Card body className="count-card dark-card">
+                                  <h4> <FontAwesome name="cubes" /> Blocks</h4>
+                          </Card>
+                      </NavItem>
+                  </Col>
+                  <Col>
+                      <NavItem active={this.state.activeTab.txTab} onClick={this.handleClickTransactionView}>
+                          <Card body className="count-card light-card" >
+                                  <h4><FontAwesome name="list-alt" /> Transactions</h4>
+                          </Card>
+                      </NavItem>
+                  </Col>
+                  <Col>
+                      <NavItem active={this.state.activeTab.chaincodesTab} onClick={this.handleClickChaincodeView }>
+                          <Card body className="count-card dark-card" >
+                                  <h4><FontAwesome name="handshake-o" />  Chaincodes</h4>
+                          </Card>
+                      </NavItem>
+                  </Col>
+                  <Col>
+                      <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }>
+                         <Card body className="count-card light-card" >
+                                 <h4><FontAwesome name="users" />  UUID</h4>
+                         </Card>
+                      </NavItem>
+                  </Col>
+              </Row>
             </Nav>
           </Navbar>
         </div>
-        <div className="dash-stats">
-        </div>
-        <div style={{ position: 'absolute', top: 300, left: 30, zIndex: 1000 }}>
+
+
+        <div style={{ position: 'absolute', top: 200, left: 30, zIndex: 1000 }}>
           {currentView}
         </div>
 
-        <div className="producerlabel">
-          <Notifications options={{ align: "left"}}/>
+        <div className="notifications">
+          <Notifications />
         </div>
 
       </div>
