@@ -53,6 +53,8 @@ const styles = theme => ({
 class MenuBar extends Component {
   constructor(props) {
     super(props);
+    var myX = window.screenX;
+    var myY = window.screenY;
     this.state = {
       activeView: 'DashboardView',
       activeTab: { dashboardTab: true, peersTab: false, blocksTab: false, chaincodesTab: false, matchedUUIDTab: false },
@@ -265,8 +267,16 @@ class MenuBar extends Component {
         </div>
 
 
-        <div style={{ position: 'relative', right: 100, zIndex: 1000 }}>
+        <div style={{ position: 'relative', left: 0, right: 100, zIndex: 1000 }}>
           {currentView}
+        </div>
+
+        <div>
+            <script type="text/javascript">
+            document.write(myX)
+            </script>
+          <h1>"x" + myX</h1>
+          <h2>"y" + myY</h2>
         </div>
 
         <div className="notifications">
