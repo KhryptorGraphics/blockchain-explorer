@@ -1,9 +1,9 @@
 {
-  "short_name": "hyperledgerexplorer",
+  "short_name": "DistributedID",
   "name": "Distributed ID",
   "icons": [
     {
-      "src": "DistributedID_Logo.ico",
+      "src": "logo-icon.png",
       "sizes": "192x192",
       "type": "image/png"
     }

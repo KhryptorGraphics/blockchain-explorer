@@ -10,6 +10,8 @@ import Avatar from 'material-ui/Avatar';
 import FontAwesome from 'react-fontawesome';
 import { Badge } from 'reactstrap';
 import Timeago from 'react-timeago';
+
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -17,7 +19,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     avatarBlue: {
-        backgroundColor: '#1C3860'
+        backgroundColor: '#29621e'
     }
 });
 
@@ -51,9 +53,8 @@ class NotificationPanel extends Component {
             return (
                 <div className={classes.root}>
                     <List component="nav">
-
                         <ListItem button>
-                            <Typography variant="title"> NO NOTIFICATIONS</Typography>
+                            <Typography variant="title"> NO NEW NOTIFICATIONS</Typography>
                         </ListItem>
                     </List>
                 </div>

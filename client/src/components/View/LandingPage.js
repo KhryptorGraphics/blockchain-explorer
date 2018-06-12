@@ -20,6 +20,7 @@ import { getChannel as getChannelCreator } from '../../store/actions/channel/act
 import { getHeaderCount as getHeaderCountCreator } from '../../store/actions/header/action-creators';
 import { getChaincodes as getChaincodesCreator } from '../../store/actions/chaincodes/action-creators';
 import { getTxByOrg as getTxByOrgCreator } from '../../store/actions/charts/action-creators';
+
 class LandingPage extends Component {
     constructor(props) {
         super(props);
@@ -60,7 +61,6 @@ class LandingPage extends Component {
     render() {
         return (
             <div className="landing" >
-                {/* <h1>PREPARING EXPLORER</h1> */}
                 <img src={Logo} style={this.state.logoStyle} alt="DistributedID Logo" />
                 <Slider {...this.state.settings}>
                     <div><h3>ACCESSING THE NETWORK</h3></div>
