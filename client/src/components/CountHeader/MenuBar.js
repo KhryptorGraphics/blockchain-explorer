@@ -220,7 +220,7 @@ class MenuBar extends Component {
 
     return (
       <div>
-        <div className="menuItems">
+        <div className="menuItems" style={{ position: 'relative', zIndex: 1000 }}>
           <Navbar color="faded" light expand="xs" margin-left="0px">
             <Nav className="ml-auto" navbar>
               <Row>
@@ -265,7 +265,7 @@ class MenuBar extends Component {
         </div>
 
 
-        <div style={{ position: 'absolute', top: 200, left: 30, zIndex: 1000 }}>
+        <div style={{ position: 'relative', right: 100, zIndex: 1000 }}>
           {currentView}
         </div>
 
