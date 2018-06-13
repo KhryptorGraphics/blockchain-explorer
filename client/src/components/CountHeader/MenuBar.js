@@ -76,6 +76,7 @@ class MenuBar extends Component {
           className: css({background: 'darkgreen'}),
           bodyClassName: css({color: 'white'}),
           hideProgressBar: true,
+          pauseOnHover: true,
           position: toast.POSITION.BOTTOM_RIGHT
     });
   }

@@ -54,7 +54,7 @@ class NotificationPanel extends Component {
                 <div className={classes.root}>
                     <List component="nav">
                         <ListItem button>
-                            <Typography variant="title"> NO NEW NOTIFICATIONS</Typography>
+                            <Typography variant="title"> No New Notifications</Typography>
                         </ListItem>
                     </List>
                 </div>
