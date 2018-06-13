@@ -284,9 +284,10 @@ class MenuBar extends Component {
         </div>
 
         <div className="notifications">
-          <ToastContainer />
+            <Button active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView} color="primary">
+                <ToastContainer />
+            </Button>
         </div>
-
       </div>
     );
   }
