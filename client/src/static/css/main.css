@@ -31,6 +31,8 @@
 /* Navigation bar */
  div.menuItems > nav > ul{
     margin-left: 160px!important;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .menuItems > nav > ul > li.active{
@@ -47,6 +49,7 @@ div.menuItems > nav{
     width: 200px;
     height: 50px;
 }
+
 /* Dashboard */
  .count-card{
      min-width: 290px;

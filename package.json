@@ -13,7 +13,7 @@
     "npm": ">=3.10.10"
   },
   "scripts": {
-     "start": "./start.sh"
+    "start": "./start.sh"
   },
   "dependencies": {
     "ajv": "^5.5.2",
@@ -24,10 +24,13 @@
     "fabric-ca-client": "^1.1.0",
     "fabric-client": "^1.1.0",
     "fast-stats": "0.0.3",
+    "glamor": "^2.20.40",
     "http-status-codes": "^1.3.0",
     "log4js": "^0.6.38",
     "pg": "^7.4.1",
     "prettyjson": "^1.2.1",
+    "react-fontawesome": "^1.6.1",
+    "react-toastify": "^4.1.0",
     "stomp-broker-js": "^0.1.3",
     "stompjs": "^2.3.3",
     "winston": "^2.2.0",
