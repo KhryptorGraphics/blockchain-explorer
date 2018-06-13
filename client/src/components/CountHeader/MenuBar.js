@@ -101,12 +101,17 @@ class MenuBar extends Component {
     }
 
     if (this.state.blockHeight != this.props.countHeader.latestBlock){
-        this.blockAddedNotify();
+        <Button active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView} color="clear">
+            {this.blockAddedNotify()}
+        </Button>
+        //this.blockAddedNotify();
         this.setState({ blockHeight: this.props.countHeader.latestBlock });
     }
 
     if (this.state.uuidHeight != this.props.uuidList.length) {
-        this.UUIDMatchedNotify();
+        <Button active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView} color="clear">
+            {this.UUIDMatchedNotify()}
+        </Button>
         this.setState({ uuidHeight: this.props.uuidList.length });
     }
   }
@@ -283,10 +288,10 @@ class MenuBar extends Component {
           {currentView}
         </div>
 
+
+
         <div className="notifications">
-            <Button active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView} color="clear">
-                <ToastContainer />
-            </Button>
+            <ToastContainer />
         </div>
       </div>
     );

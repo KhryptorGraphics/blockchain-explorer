@@ -10,6 +10,9 @@ import Avatar from 'material-ui/Avatar';
 import FontAwesome from 'react-fontawesome';
 import { Badge } from 'reactstrap';
 import Timeago from 'react-timeago';
+import MenuBar from '../CountHeader/MenuBar'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const styles = theme => ({
@@ -49,6 +52,7 @@ class NotificationPanel extends Component {
     }
     render() {
         const { classes } = this.props;
+        //this.props.notifications.length++;
         if (this.props.notifications.length === 0) {
             return (
                 <div className={classes.root}>
@@ -60,6 +64,20 @@ class NotificationPanel extends Component {
                 </div>
             )
         }
+        // else{
+
+        // return (
+        //     <div className={classes.root}>
+        //         <List component="nav">
+        //             <ListItem button>
+        //                 <Typography variant="title"> No New Notifications</Typography>
+        //                 <ToastContainer />
+        //             </ListItem>
+        //         </List>
+        //     </div>
+        // )
+        // }
+
         return (
             <div className={classes.root}>
                 <List component="nav">
