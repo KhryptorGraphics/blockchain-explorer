@@ -62,7 +62,6 @@ class MenuBar extends Component {
       countHeader: { countHeader: this.props.getCountHeader() },
       blockHeight: 0,
       uuidHeight: 0,
-      notificationTrigger: 0
     }
 
     this.handleClickTransactionView = this.handleClickTransactionView.bind(this);
@@ -110,14 +109,11 @@ class MenuBar extends Component {
     if (this.state.blockHeight != this.props.countHeader.latestBlock){
         this.blockAddedNotify();
 
-        //this.setState({ notificationTrigger: this.props.notifications.length.increment});
         this.setState({ blockHeight: this.props.countHeader.latestBlock });
     }
 
     if (this.state.uuidHeight != this.props.uuidList.length) {
-        //<Button active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView} color="clear">
         this.UUIDMatchedNotify();
-        //</Button>
         this.setState({ uuidHeight: this.props.uuidList.length });
     }
   }
@@ -297,6 +293,7 @@ class MenuBar extends Component {
         <div className="notifications">
             <ToastContainer />
         </div>
+
       </div>
     );
   }
