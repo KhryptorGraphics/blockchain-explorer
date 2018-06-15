@@ -26,9 +26,7 @@ import { getUUIDStatusRow as getUUIDStatusRowCreator } from '../../store/actions
 import { getUUIDStatusList as getUUIDStatusListCreator } from '../../store/actions/matcheduuids/action-creators';
 import {Button} from 'reactstrap';
 import Blocks from '../Lists/Blocks';
-
 import DashboardView from '../View/DashboardView';
-
 import MatchedUUID from '../Lists/MatchedUUID';
 
 
@@ -50,31 +48,36 @@ class NotificationPanel extends Component {
         super(props);
         this.state = {
             activeView: 'DashboardView',
-            activeTab: { dashboardTab: true, peersTab: false, blocksTab: false, chaincodesTab: false, matchedUUIDTab: false },
+            activeTab: { dashboardTab: true, blocksTab: false, matchedUUIDTab: false },
             blockHeight: 0,
             uuidHeight: 0,
+            blockAddedCalled: 0,
+            uuidMatchedCalled: 0,
             notificationTrigger: 0
         }
-        this.avatarIcon = this.avatarIcon.bind(this);
+
+        this.makeNotificationTriggerOne = this.makeNotificationTriggerOne.bind(this);
+        this.makeBlockAddedOne = this.makeBlockAddedOne.bind(this);
+        this.makeUUIDMatchedCalledOne = this.makeUUIDMatchedCalledOne.bind(this);
         this.handleClickBlockView = this.handleClickBlockView.bind(this);
         this.handleClickMatchedUUIDView = this.handleClickMatchedUUIDView.bind(this);
         this.handleClickDashboardView = this.handleClickDashboardView.bind(this);
+        this.avatarIcon = this.avatarIcon.bind(this);
     }
     handleData(data) {
 
     }
-    handleClickDashboardView() {
-      this.setState({ activeView: 'DashboardView' });
-      this.setState({
-        activeTab: {
-          dashboardTab: true,
-          peersTab: false,
-          blocksTab: false,
-          txTab: false,
-          chaincodesTab: false,
-          matchedUUIDTab: false
-        }
-      });
+
+    makeNotificationTriggerOne(){
+        this.setState({ notificationTrigger: (this.state.notificationTrigger = 1) });
+    }
+
+    makeBlockAddedOne(){
+        this.setState({ blockAddedCalled: (this.state.blockAddedCalled = 1) });
+    }
+
+    makeUUIDMatchedCalledOne(){
+        this.setState({ uuidMatchedCalled: (this.state.uuidMatchedCalled = 1) });
     }
 
     handleClickBlockView() {
@@ -82,10 +85,18 @@ class NotificationPanel extends Component {
       this.setState({
         activeTab: {
           dashboardTab: false,
-          peersTab: false,
           blocksTab: true,
-          txTab: false,
-          chaincodesTab: false,
+          matchedUUIDTab: false
+        }
+      });
+    }
+
+    handleClickDashboardView() {
+      this.setState({ activeView: 'DashboardView' });
+      this.setState({
+        activeTab: {
+          dashboardTab: true,
+          blocksTab: false,
           matchedUUIDTab: false
         }
       });
@@ -96,10 +107,7 @@ class NotificationPanel extends Component {
       this.setState({
         activeTab: {
           dashboardTab: false,
-          peersTab: false,
           blocksTab: false,
-          txTab: false,
-          chaincodesTab: false,
           matchedUUIDTab: true
         }
       });
@@ -112,15 +120,18 @@ class NotificationPanel extends Component {
       }
 
         if (this.state.blockHeight !== this.props.countHeader.latestBlock){
-            this.setState({ notificationTrigger: 1});
+            this.makeNotificationTriggerOne();
+            this.makeBlockAddedOne();
             this.setState({ blockHeight: this.props.countHeader.latestBlock });
         }
 
         if (this.state.uuidHeight !== this.props.uuidList.length) {
-            this.setState({ notificationTrigger: 1});
+            this.makeNotificationTriggerOne();
+            this.makeUUIDMatchedCalledOne();
             this.setState({ uuidHeight: this.props.uuidList.length });
         }
     }
+
     componentDidMount() {
       setInterval(() => {
         this.props.getCountHeader(this.props.channel.currentChannel);
@@ -135,10 +146,49 @@ class NotificationPanel extends Component {
                 return (<Avatar className={classes.avatarBlue}><FontAwesome name="cube" /> </Avatar>);
                 break;
             default:
-                return (<Avatar ><FontAwesome name="exclamation" /> </Avatar>)
+                return (<Avatar ><FontAwesome name="exclamation" /> </Avatar>);
                 break;
         }
     }
+
+    wasBlockAddedNotification(){
+        if ( this.state.blockAddedCalled === 1) {
+            return(
+                // <div className={classes.root} >
+                //      <List component="nav">
+                        <li button>
+                            <Button active={ this.state.activeTab.blocksTab } onClick={ this.handleClickBlockView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }}>
+                                <p> Block Added!! </p>
+                                <p> Click for more details </p>
+                            </Button>
+                        </li>
+                     //</List>
+                //</div>
+            );
+        }
+    }
+
+    wasUUIDMatchedNotifucation(){
+        if ( this.state.uuidMatchedCalled === 0) {
+            return(
+                // <div className={classes.root} >
+                //  <List component="nav">
+                        <li button>
+                            <Button active={ this.state.activeTab.matchedUUIDTab } onClick={ this.handleClickMatchedUUIDView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }} >
+                                <p> UUID Matched!! </p>
+                                <p>Click for more details</p>
+                            </Button>
+                        </li>
+            );
+        }
+    }
+
+    // listOfNotifications(props){
+    //     const list = props.list;
+    //     const listNotifications = list.map((notify) =>
+    //     <li key=
+    //     }
+
     render() {
         let currentView = null;
         switch (this.state.activeView) {
@@ -157,34 +207,59 @@ class NotificationPanel extends Component {
         }
 
         const { classes } = this.props;
-        if ( this.state.notificationTrigger === 0 ) {
+        if ( this.state.notificationTrigger === 1 ) {
             return (
-                <div className={classes.root}>
-                    <List component="nav">
-                        <ListItem button>
-                            <Typography variant="title"> No New Notifications</Typography>
-                        </ListItem>
-                    </List>
+                <div className={classes.root} >
+                        <ul component="nav">
+                            <li>
+                                <Typography variant="title"> Notifications: Trig: {this.state.notificationTrigger} Block:{this.state.blockAddedCalled} AND UUID:{this.state.uuidMatchedCalled}</Typography>
+                                {this.wasBlockAddedNotification}
+                                {this.wasUUIDMatchedNotifucation}
+                            </li>
+                        </ul>
                 </div>
-            )
+
+                // if ( this.state.blockAddedCalled === 1) {
+                //         <div className={classes.root} >
+                //              <List component="nav">
+                //                 <ListItem button>
+                //                     <Button active={ this.state.activeTab.blocksTab } onClick={ this.handleClickBlockView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }}>
+                //                         <p> Block Added!! </p>
+                //                         <p>Click for more details</p>
+                //                     </Button>
+                //                 </ListItem>
+                //              </List>
+                //         </div>
+                //     }}
+
+                // if ( this.state.uuidMatchedCalled === 0) {
+                //     <div className={classes.root} >
+                //      <List component="nav">
+                //             <ListItem button>
+                //                 <Button active={ this.state.activeTab.matchedUUIDTab } onClick={ this.handleClickMatchedUUIDView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }} >
+                //                     <p> UUID Matched!! </p>
+                //                     <p>Click for more details</p>
+                //                 </Button>
+                //             </ListItem>
+                //     </List>
+                // }
+                // </List>
+                // </div>
+            );
         }
 
         return (
-            <div className={classes.root}>
+            <div className={classes.root} >
                 <List component="nav">
-                    <Typography variant="title"> Got Here.</Typography>
-                    <ListItem>
-                        <Button active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView} color='success'>
-                            Block Added!!
-                        </Button>
+                    <ListItem button>
+                        <Typography variant="title"> No New Notifications</Typography>
                     </ListItem>
-
                 </List>
             </div>
         );
     }
-
 }
+
 
 const mapDispatchToProps = (dispatch) => ({
     getLatestBlock: (curChannel) => dispatch(getLatestBlockCreator(curChannel)),

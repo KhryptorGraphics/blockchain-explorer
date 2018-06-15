@@ -30,8 +30,6 @@ import { css } from 'glamor';
 import NotificationPanel from '../Panels/Notifications';
 
 
-import { StyleSheet, View, Text} from 'react-native';
-
 import {
   Navbar,
   Nav,
@@ -76,28 +74,31 @@ class MenuBar extends Component {
   }
 
   blockAddedNotify(){
-      toast(<Button active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView} color='success'>
-          Block Added!!
+      toast(<Button active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView} style={{background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen'}}>
+          <p> Block Added!! </p>
+          <p>Click for more details</p>
       </Button>, {
           className: css({background: 'darkgreen'}),
           bodyClassName: css({color: 'white'}),
           hideProgressBar: true,
+          closeOnClick: false,
           position: toast.POSITION.BOTTOM_RIGHT
     });
   }
 
 
   UUIDMatchedNotify(){
-      toast(<Button active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView } color='success'>
-          UUID Matched!!
+      toast(<Button active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView } style={{background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen'}} >
+          <p> UUID Matched!! </p>
+          <p>Click for more details</p>
       </Button>, {
           className: css({background: 'darkgreen'}),
           bodyClassName: css({color: 'white'}),
           hideProgressBar: true,
+          closeOnClick: false,
           position: toast.POSITION.BOTTOM_RIGHT
     });
   }
-
 
   componentWillMount() {
 
