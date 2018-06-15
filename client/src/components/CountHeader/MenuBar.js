@@ -27,7 +27,10 @@ import {Button} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
-import NotificationPanel from '../Panels/Notifications'
+import NotificationPanel from '../Panels/Notifications';
+
+
+import { StyleSheet, View, Text} from 'react-native';
 
 import {
   Navbar,
@@ -106,13 +109,12 @@ class MenuBar extends Component {
       this.setState({ countHeader: nextProps.countHeader });
     }
 
-    if (this.state.blockHeight != this.props.countHeader.latestBlock){
+    if (this.state.blockHeight !== this.props.countHeader.latestBlock){
         this.blockAddedNotify();
-
         this.setState({ blockHeight: this.props.countHeader.latestBlock });
     }
 
-    if (this.state.uuidHeight != this.props.uuidList.length) {
+    if (this.state.uuidHeight !== this.props.uuidList.length) {
         this.UUIDMatchedNotify();
         this.setState({ uuidHeight: this.props.uuidList.length });
     }
