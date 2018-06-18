@@ -8,16 +8,10 @@ import List, { ListItem } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Avatar from 'material-ui/Avatar';
 import FontAwesome from 'react-fontawesome';
-//import { Badge } from 'reactstrap';
-//import Timeago from 'react-timeago';
-//import { MenuBar} from '../CountHeader/MenuBar'
-//import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
-import { getChaincodes as getChaincodesCreator } from '../../store/actions/chaincodes/action-creators';
-//import Channels from '../Lists/Channels';
-import { getBlockList as getBlockListCreator } from '../../store/actions/block/action-creators';
+import { getChaincodes as getChaincodesCreator } from '../../store/actions/chaincodes/action-creators';import { getBlockList as getBlockListCreator } from '../../store/actions/block/action-creators';
 import { getTransactionInfo as getTransactionInfoCreator } from '../../store/actions/transaction/action-creators';
 import { getLatestBlock as getLatestBlockCreator } from '../../store/actions/latestBlock/action-creators';
 import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/header/action-creators';
@@ -115,7 +109,6 @@ class NotificationPanel extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (JSON.stringify(nextProps.countHeader) !== JSON.stringify(this.props.countHeader)) {
-          // console.log('nextProps.countHeader !== this.props.countHeader')
           this.setState({ countHeader: nextProps.countHeader });
       }
 
@@ -154,40 +147,28 @@ class NotificationPanel extends Component {
     wasBlockAddedNotification(){
         if ( this.state.blockAddedCalled === 1) {
             return(
-                // <div className={classes.root} >
-                //      <List component="nav">
-                        <li button>
-                            <Button active={ this.state.activeTab.blocksTab } onClick={ this.handleClickBlockView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }}>
-                                <p> Block Added!! </p>
-                                <p> Click for more details </p>
-                            </Button>
-                        </li>
-                     //</List>
-                //</div>
+                <li button>
+                    <Button active={ this.state.activeTab.blocksTab } onClick={ this.handleClickBlockView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }}>
+                        <p> Block Added!! </p>
+                        <p> Click for more details </p>
+                    </Button>
+                </li>
             );
         }
     }
 
-    wasUUIDMatchedNotifucation(){
+    wasUUIDMatchedNotification(){
         if ( this.state.uuidMatchedCalled === 1) {
             return(
-                // <div className={classes.root} >
-                //  <List component="nav">
-                        <li button>
-                            <Button active={ this.state.activeTab.matchedUUIDTab } onClick={ this.handleClickMatchedUUIDView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }} >
-                                <p> UUID Matched!! </p>
-                                <p>Click for more details</p>
-                            </Button>
-                        </li>
+                <li button>
+                    <Button active={ this.state.activeTab.matchedUUIDTab } onClick={ this.handleClickMatchedUUIDView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }} >
+                        <p> UUID Matched!! </p>
+                        <p>Click for more details</p>
+                    </Button>
+                </li>
             );
         }
     }
-
-    // listOfNotifications(props){
-    //     const list = props.list;
-    //     const listNotifications = list.map((notify) =>
-    //     <li key=
-    //     }
 
     render() {
         let currentView = null;
@@ -218,33 +199,6 @@ class NotificationPanel extends Component {
                             </li>
                         </ul>
                 </div>
-
-                // if ( this.state.blockAddedCalled === 1) {
-                //         <div className={classes.root} >
-                //              <List component="nav">
-                //                 <ListItem button>
-                //                     <Button active={ this.state.activeTab.blocksTab } onClick={ this.handleClickBlockView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }}>
-                //                         <p> Block Added!! </p>
-                //                         <p>Click for more details</p>
-                //                     </Button>
-                //                 </ListItem>
-                //              </List>
-                //         </div>
-                //     }}
-
-                // if ( this.state.uuidMatchedCalled === 0) {
-                //     <div className={classes.root} >
-                //      <List component="nav">
-                //             <ListItem button>
-                //                 <Button active={ this.state.activeTab.matchedUUIDTab } onClick={ this.handleClickMatchedUUIDView } style={{ background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }} >
-                //                     <p> UUID Matched!! </p>
-                //                     <p>Click for more details</p>
-                //                 </Button>
-                //             </ListItem>
-                //     </List>
-                // }
-                // </List>
-                // </div>
             );
         }
 
