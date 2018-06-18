@@ -169,7 +169,7 @@ class NotificationPanel extends Component {
     }
 
     wasUUIDMatchedNotifucation(){
-        if ( this.state.uuidMatchedCalled === 0) {
+        if ( this.state.uuidMatchedCalled === 1) {
             return(
                 // <div className={classes.root} >
                 //  <List component="nav">
@@ -213,8 +213,8 @@ class NotificationPanel extends Component {
                         <ul component="nav">
                             <li>
                                 <Typography variant="title"> Notifications: Trig: {this.state.notificationTrigger} Block:{this.state.blockAddedCalled} AND UUID:{this.state.uuidMatchedCalled}</Typography>
-                                {this.wasBlockAddedNotification}
-                                {this.wasUUIDMatchedNotifucation}
+                                {this.wasBlockAddedNotification()}
+                                {this.wasUUIDMatchedNotification()}
                             </li>
                         </ul>
                 </div>
