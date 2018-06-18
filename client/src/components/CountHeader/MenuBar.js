@@ -286,11 +286,8 @@ class MenuBar extends Component {
         </div>
 
         <div>
-            <script type="text/javascript">
-            document.write(myX)
-            </script>
-          <h1>"x" + myX</h1>
-          <h2>"y" + myY</h2>
+          <h1>"x" + {this.state.myX}</h1>
+          <h2>"y" + {this.state.myY}</h2>
         </div>
 
         <div className="notifications">
