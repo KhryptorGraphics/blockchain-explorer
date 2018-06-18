@@ -53,16 +53,14 @@ cd blockchain-explorer
 You can build all the necessary Docker images from the `bcmanager` project:
 
 ```
-make buildDockerImages
+bcmanager$ make buildDockerImages
 ```
 
 To build an image using local changes from the `blockchain-explorer` project:
 
 ```
-docker build --build-arg REACT_APP_CLIENT=Provider -t distributedid/explorer-provider -f ./docker/Dockerfile.provider-explorer .
-```
-```
-docker build --build-arg REACT_APP_CLIENT=Consumer -t distributedid/explorer-consumer -f ./docker/Dockerfile.consumer-explorer .
+blockchain-explorer$ docker build --build-arg REACT_APP_CLIENT=Provider -t distributedid/explorer-provider -f ./Dockerfile.provider-explorer .
+blockchain-explorer$ docker build --build-arg REACT_APP_CLIENT=Consumer -t distributedid/explorer-consumer -f ./Dockerfile.consumer-explorer .
 
 ```
 
