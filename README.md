@@ -93,14 +93,27 @@ If all these commands are successful, you will have a Network running in docker 
 
 Note: Open a new window and run in the __bcmanager__ repository.
 
-1. To start the Explorer services in the Network using your local Docker image: 
+1. To start the Explorer services in the Network using a Docker image:
 
    ```
    bcmanager $ make startExplorer
    ```
-   
+
    Note: If editing the source code, you'll need to rebuild the Docker images in
    `blockchain-explorer` and restart the Explorer services.
+
+2. Or, to start the Explorer on your computer:
+
+   ```
+   # if a new branch or dependencies have changed
+   blockchain-explorerer$ npm install
+   blockchain-explorerer$ (cd client ; npm install )
+
+   blockchain-explorerer$ (cd client ; REACT_APP_CLIENT=Producer npm run build )
+   # or
+   blockchain-explorerer$ (cd client ; REACT_APP_CLIENT=Consumer npm run build )
+   blockchain-explorerer$ npm start
+   ```
 
 ### Access the GUI
 
