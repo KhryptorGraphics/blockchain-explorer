@@ -193,7 +193,7 @@ class NotificationPanel extends Component {
                 <div className={classes.root} >
                         <ul component="nav">
                             <li>
-                                <Typography variant="title"> Notifications: Trig: {this.state.notificationTrigger} Block:{this.state.blockAddedCalled} AND UUID:{this.state.uuidMatchedCalled}</Typography>
+                                <Typography variant="title"> Notifications: </Typography>
                                 {this.wasBlockAddedNotification()}
                                 {this.wasUUIDMatchedNotification()}
                             </li>
