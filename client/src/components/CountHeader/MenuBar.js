@@ -21,10 +21,12 @@ import { getHeaderCount as getCountHeaderCreator } from '../../store/actions/hea
 import { getTransactionList as getTransactionListCreator } from '../../store/actions/transactions/action-creators';
 import { getUUIDStatusRow as getUUIDStatusRowCreator } from '../../store/actions/matcheduuid/action-creators';
 import { getUUIDStatusList as getUUIDStatusListCreator } from '../../store/actions/matcheduuids/action-creators';
-import Notifications, { notify } from 'react-notify-toast';
 import FontAwesome from 'react-fontawesome';
 import { Card, Row, Col, CardBody } from 'reactstrap';
-import {Button} from 'reactstrap'
+import {Button} from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import { css } from 'glamor'
 
 import {
   Navbar,
@@ -71,6 +73,24 @@ class MenuBar extends Component {
     this.handleClickMatchedUUIDView = this.handleClickMatchedUUIDView.bind(this);
   }
 
+  blockAddedNotify(){
+      toast("Block Added!!", {
+          className: css({background: 'darkgreen'}),
+          bodyClassName: css({color: 'white'}),
+          hideProgressBar: true,
+          position: toast.POSITION.BOTTOM_RIGHT
+    });
+  }
+
+  UUIDMatchedNotify(){
+      toast("UUID Matched!!", {
+          className: css({background: 'darkgreen'}),
+          bodyClassName: css({color: 'white'}),
+          hideProgressBar: true,
+          position: toast.POSITION.BOTTOM_RIGHT
+    });
+  }
+
   componentWillMount() {
 
   }
@@ -82,27 +102,22 @@ class MenuBar extends Component {
     }
 
     if (this.state.blockHeight != this.props.countHeader.latestBlock){
-        let myColour = { background: '#29621e', text: "#ffffff" };
-        notify.show('Block Added !!', "custom", 5000, myColour);
+        this.blockAddedNotify();
         this.setState({ blockHeight: this.props.countHeader.latestBlock });
     }
 
     if (this.state.uuidHeight != this.props.uuidList.length) {
-        let myColour = { background: '#29621e', text: "#ffffff" };
-        notify.show('New UUID Added !!!', "custom", 5000, myColour);
+        this.UUIDMatchedNotify();
         this.setState({ uuidHeight: this.props.uuidList.length });
     }
   }
 
   componentDidMount() {
-
-
     setInterval(() => {
       this.props.getCountHeader(this.props.channel.currentChannel);
       this.props.getLatestBlock(this.props.channel.currentChannel, 0);
       this.props.getUUIDStatusList(this.props.channel.currentChannel);
     }, 3000)
-
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -192,7 +207,6 @@ class MenuBar extends Component {
 
   render() {
     let currentView = null;
-
     switch (this.state.activeView) {
       case 'TransactionView':
         currentView = <Transactions channel={this.props.channel} countHeader={this.props.countHeader} transactionList={this.props.transactionList.rows} getTransactionList={this.props.getTransactionList} transaction={this.props.transaction} getTransactionInfo={this.props.getTransactionInfo}/>;
@@ -222,7 +236,7 @@ class MenuBar extends Component {
 
     return (
       <div>
-        <div className="menuItems" style={{ position: 'relative', zIndex: 1000 }}>
+        <div className="menuItems">
           <Navbar color="faded" light expand="xs" margin-left="0px">
             <Nav className="ml-auto" navbar>
               <Row>
@@ -280,7 +294,7 @@ class MenuBar extends Component {
         </div>
 
         <div className="notifications">
-          <Notifications />
+          <ToastContainer />
         </div>
 
       </div>
