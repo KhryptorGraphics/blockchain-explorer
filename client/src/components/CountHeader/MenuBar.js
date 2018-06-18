@@ -25,8 +25,9 @@ import FontAwesome from 'react-fontawesome';
 import { Card, Row, Col, CardBody } from 'reactstrap';
 import {Button} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
-import { css } from 'glamor'
+import 'react-toastify/dist/ReactToastify.css';
+import { css } from 'glamor';
+import AutoScale from 'react-auto-scale';
 
 import {
   Navbar,
@@ -237,6 +238,7 @@ class MenuBar extends Component {
     return (
       <div>
         <div className="menuItems">
+            <AutoScale>
           <Navbar color="faded" light expand="xs" margin-left="0px">
             <Nav className="ml-auto" navbar>
               <Row>
@@ -278,16 +280,14 @@ class MenuBar extends Component {
               </Row>
             </Nav>
           </Navbar>
+          </AutoScale>
         </div>
 
 
         <div style={{ position: 'relative', left: 0, right: 100, zIndex: 1000 }}>
+        <AutoScale>
           {currentView}
-        </div>
-
-        <div>
-          <h1>"x" + {this.state.myX}</h1>
-          <h2>"y" + {this.state.myY}</h2>
+        </AutoScale>
         </div>
 
         <div className="notifications">

@@ -17,6 +17,7 @@
     "moment-timezone": "^0.5.16",
     "pg": "^7.4.1",
     "react": "^16.2.0",
+    "react-auto-scale": "^1.0.4",
     "react-d3-graph": "^1.0.1",
     "react-dom": "^16.2.0",
     "react-event-timeline": "^1.5.1",
