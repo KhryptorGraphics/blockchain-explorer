@@ -1,0 +1,23 @@
+FROM node:6
+
+RUN mkdir -p /opt/gopath/src/github.com/distributedID
+
+ARG REACT_APP_CLIENT=Provider
+ENV REACT_APP_CLIENT=$REACT_APP_CLIENT
+ENV GOPATH=/opt/gopath
+
+WORKDIR /opt/gopath/src/github.com/distributedID
+
+ADD . /opt/gopath/src/github.com/distributedID/blockchain-explorer
+
+WORKDIR /opt/gopath/src/github.com/distributedID/blockchain-explorer
+
+ADD ./config-$REACT_APP_CLIENT.json ./config.json
+
+RUN npm install && \
+	cd client && \
+	npm install && \
+	REACT_APP_CLIENT=$REACT_APP_CLIENT npm run build
+
+
+EXPOSE 11000
