@@ -122,9 +122,17 @@ Note: Open a new window and run in the __bcmanager__ repository.
 
 To stop the explorer:
 
-```
-bcmanager $ docker stop explorer-provider.diid.network explorer-consumer.diid.network
-```
+1. If you started it using the Docker image:
+
+   ```
+   bcmanager $ docker stop explorer-provider.diid.network explorer-consumer.diid.network
+   ```
+
+2. Or, if you started it with `npm`
+
+   ```
+   blockchain-explorer$ ^C (Ctrl-C)
+   ```
 
 To tear down the network and start over:
 ```
