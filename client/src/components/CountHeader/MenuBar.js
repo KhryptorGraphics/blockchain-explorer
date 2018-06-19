@@ -75,8 +75,8 @@ class MenuBar extends Component {
 
   blockAddedNotify(){
       toast(<Button active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView} style={{background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen'}}>
-          <p> Block Added!! </p>
-          <p>Click for more details</p>
+          <p> Block Added </p>
+          <p> Click here for more information </p>
       </Button>, {
           className: css({background: 'darkgreen'}),
           bodyClassName: css({color: 'white'}),
@@ -88,9 +88,9 @@ class MenuBar extends Component {
 
 
   UUIDMatchedNotify(){
-      toast(<Button active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView } style={{background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen'}} >
-          <p> UUID Matched!! </p>
-          <p>Click for more details</p>
+      toast(<Button active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView } style={{background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen' }} >
+          <p> UUID Matched </p>
+          <p> Click here for more information </p>
       </Button>, {
           className: css({background: 'darkgreen'}),
           bodyClassName: css({color: 'white'}),
