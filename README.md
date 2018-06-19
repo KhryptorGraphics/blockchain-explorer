@@ -77,8 +77,7 @@ Note: Run within the __bcmanager__ repository
    ```
    bcmanager$ make startNetwork initChannels
    bcmanager$ make startRestApi startIdentityWriter
-   bcmanager$ make sendIdentity sendEvent
-   bcmanager$ (cd fixtures/environments/local ; docker-compose up -d postgres-provider postgres-consumer)
+   bcmanager$ make startProviderPostgres startConsumerPostgres
    ```
 
 If all these commands are successful, you will have a Network running in docker with:
