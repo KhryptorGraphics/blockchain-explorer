@@ -29,6 +29,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import NotificationPanel from '../Panels/Notifications';
 
+
 import {
   Navbar,
   Nav,
@@ -56,8 +57,6 @@ const styles = theme => ({
 class MenuBar extends Component {
   constructor(props) {
     super(props);
-    var myX = window.screenX;
-    var myY = window.screenY;
     this.state = {
       activeView: 'DashboardView',
       activeTab: { dashboardTab: true, peersTab: false, blocksTab: false, chaincodesTab: false, matchedUUIDTab: false },
@@ -290,8 +289,7 @@ class MenuBar extends Component {
           </Navbar>
         </div>
 
-
-        <div style={{ position: 'relative', left: 0, right: 100, zIndex: 1000 }}>
+        <div style={{ position: 'absolute', top: 200, left: 30, zIndex: 200 }}>
           {currentView}
         </div>
 
