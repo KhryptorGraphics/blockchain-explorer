@@ -103,13 +103,13 @@ Note: Open a new window and run in the __bcmanager__ repository.
 
    ```
    # if a new branch or dependencies have changed
-   blockchain-explorerer$ npm install
-   blockchain-explorerer$ (cd client ; npm install )
+   blockchain-explorer npm install
+   blockchain-explorer (cd client ; npm install )
 
-   blockchain-explorerer$ (cd client ; REACT_APP_CLIENT=Producer npm run build )
+   blockchain-explorer (cd client ; REACT_APP_CLIENT=Producer npm run build )
    # or
-   blockchain-explorerer$ (cd client ; REACT_APP_CLIENT=Consumer npm run build )
-   blockchain-explorerer$ npm start
+   blockchain-explorer (cd client ; REACT_APP_CLIENT=Consumer npm run build )
+   blockchain-explorer npm start
    ```
 
 ### Access the GUI
