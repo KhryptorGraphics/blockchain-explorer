@@ -28,6 +28,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import AutoScale from 'react-auto-scale';
+import NotificationPanel from '../Panels/Notifications';
 
 import {
   Navbar,
@@ -63,7 +64,7 @@ class MenuBar extends Component {
       activeTab: { dashboardTab: true, peersTab: false, blocksTab: false, chaincodesTab: false, matchedUUIDTab: false },
       countHeader: { countHeader: this.props.getCountHeader() },
       blockHeight: 0,
-      uuidHeight: 0
+      uuidHeight: 0,
     }
 
     this.handleClickTransactionView = this.handleClickTransactionView.bind(this);
@@ -75,19 +76,28 @@ class MenuBar extends Component {
   }
 
   blockAddedNotify(){
-      toast("Block Added!!", {
+      toast(<Button active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView} style={{background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen'}}>
+          <p> Block Added!! </p>
+          <p>Click for more details</p>
+      </Button>, {
           className: css({background: 'darkgreen'}),
           bodyClassName: css({color: 'white'}),
           hideProgressBar: true,
+          closeOnClick: false,
           position: toast.POSITION.BOTTOM_RIGHT
     });
   }
 
+
   UUIDMatchedNotify(){
-      toast("UUID Matched!!", {
+      toast(<Button active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView } style={{background: 'darkgreen', fontSize: 15, borderColor: 'darkgreen'}} >
+          <p> UUID Matched!! </p>
+          <p>Click for more details</p>
+      </Button>, {
           className: css({background: 'darkgreen'}),
           bodyClassName: css({color: 'white'}),
           hideProgressBar: true,
+          closeOnClick: false,
           position: toast.POSITION.BOTTOM_RIGHT
     });
   }
@@ -102,12 +112,12 @@ class MenuBar extends Component {
       this.setState({ countHeader: nextProps.countHeader });
     }
 
-    if (this.state.blockHeight != this.props.countHeader.latestBlock){
+    if (this.state.blockHeight !== this.props.countHeader.latestBlock){
         this.blockAddedNotify();
         this.setState({ blockHeight: this.props.countHeader.latestBlock });
     }
 
-    if (this.state.uuidHeight != this.props.uuidList.length) {
+    if (this.state.uuidHeight !== this.props.uuidList.length) {
         this.UUIDMatchedNotify();
         this.setState({ uuidHeight: this.props.uuidList.length });
     }
@@ -291,7 +301,7 @@ class MenuBar extends Component {
         </div>
 
         <div className="notifications">
-          <ToastContainer />
+            <ToastContainer />
         </div>
 
       </div>
