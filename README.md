@@ -123,7 +123,7 @@ Note: Open a new window and run in the __bcmanager__ repository.
 To stop the explorer:
 
 ```
-bcmanager $ make stopExplorer
+bcmanager $ docker stop explorer-provider.diid.network explorer-consumer.diid.network
 ```
 
 To tear down the network and start over:
