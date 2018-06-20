@@ -11,7 +11,7 @@ import {
 import { Graph } from 'react-d3-graph';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import 'react-tree-graph/dist/style.css';
-import Scaling, { gblWidth, gblHeight } from '../../Scaling';
+// import Scaling, { gblWidth, gblHeight } from '../../Scaling';
 
 
 class PeerGraph extends Component {
@@ -55,19 +55,19 @@ class PeerGraph extends Component {
                     "strokeWidth": 1.5,
                 }
             }
-            // ,
-            // windowWidth: window.innerWidth,
-            // windowHeight: window.innerHeight
+            ,
+            windowWidth: window.innerWidth,
+            windowHeight: window.innerHeight
 
         }
-        // this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     componentDidMount() {
-        // setInterval(() => {
-        //     this.updateWindowDimensions();
-        //     window.addEventListener('resize', this.updateWindowDimensions);
-        // }, 6000)
+        setInterval(() => {
+            this.updateWindowDimensions();
+            window.addEventListener('resize', this.updateWindowDimensions);
+        }, 6000)
 
         // var nodes = [];
         // var links = [];
@@ -94,12 +94,12 @@ class PeerGraph extends Component {
         // });
     }
 
-    // updateWindowDimensions() {
-    //   this.setState({
-    //       windowWidth: window.innerWidth,
-    //       windowHeight: window.innerHeight
-    //   });
-    // }
+    updateWindowDimensions() {
+      this.setState({
+          windowWidth: window.innerWidth,
+          windowHeight: window.innerHeight
+      });
+    }
 
 
     render() {
@@ -107,12 +107,12 @@ class PeerGraph extends Component {
             <div className="peer-graph">
                 <Card>
                     <CardHeader>
-                        <h5>PeerGraph Width: {gblWidth/6}  Height: {gblHeight/6}</h5>
+                        <h5>PeerGraph </h5>
                     </CardHeader>
                     <CardBody>
                         <Graph id="graph-id"
-                            height={gblHeight/4}
-                            width={gblWidth/5}
+                            width={this.state.windowWidth/2.7}
+                            height={this.state.windowHeight/4.2}
                             data={this.state.data}
                             config={this.state.myConfig}/>
                     </CardBody>

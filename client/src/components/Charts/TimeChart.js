@@ -5,37 +5,8 @@
 import React, { Component } from 'react';
 import { ScatterChart,Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import Card, { CardContent } from 'material-ui/Card';
-//import Scaling, { windowWidth, windowHeight } from '../../Scaling';
-//
 
-// class Scaling extends Component {
-//    constructor(props) {
-//        super(props);
-//        this.state = {
-//            windowWidth: window.innerWidth,
-//            windowHeight: window.innerHeight
-//        }
-//         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-//     }
-//
-//    componentDidMount() {
-//        setInterval(() => {
-//            this.updateWindowDimensions();
-//            window.addEventListener('resize', this.updateWindowDimensions);
-//        }, 6000)
-//    }
-//
-//    updateWindowDimensions() {
-//      this.setState({
-//          windowWidth: window.innerWidth,
-//          windowHeight: window.innerHeight
-//      });
-//    }
-//
-//    render()
-// }
-
-const TimeChart = ({ chartData }) => {
+const TimeChart = ({ chartData, width, height }) => {
   var displayData = [];
   var dataMax = 0;
 
@@ -54,10 +25,10 @@ const TimeChart = ({ chartData }) => {
 
   dataMax = dataMax + 5;
   return (
-    <div>
+    <div >
       <Card >
         <CardContent >
-          <ScatterChart width={570} height={145}>
+          <ScatterChart width={width} height={height}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="datetime" />
             <YAxis domain={[0, dataMax]} dataKey="count" />

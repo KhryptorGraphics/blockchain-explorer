@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import { PieChart, Pie, Tooltip, Legend } from 'recharts';
 import txByOrg from '../../store/reducers/txByOrg';
-import Scaling, { gblWidth, gblHeight } from '../../Scaling';
+// import Scaling, { gblWidth, gblHeight } from '../../Scaling';
 
 const colors = ['#0B091A','#29621e','#6ecd5b','#7C7C7C'];
 class OrgPieChart extends Component {
@@ -19,11 +19,11 @@ class OrgPieChart extends Component {
                 { value: 60, name: "Org1MSP", fill: "#29621e" },
                 { value: 23, name: "Org2MSP", fill: "#6ecd5b" }
             ]
-            // ,
-            // windowWidth: window.innerWidth,
-            // windowHeight: window.innerHeight
+            ,
+            windowWidth: window.innerWidth,
+            windowHeight: window.innerHeight
         }
-        // this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     componentWillReceiveProps(nextProps){
@@ -38,18 +38,18 @@ class OrgPieChart extends Component {
     }
 
     componentDidMount() {
-        // setInterval(() => {
-            // this.updateWindowDimensions();
-            // window.addEventListener('resize', this.updateWindowDimensions);
-        // }, 6000)
+        setInterval(() => {
+            this.updateWindowDimensions();
+            window.addEventListener('resize', this.updateWindowDimensions);
+        }, 6000)
     }
 
-    // updateWindowDimensions() {
-    //     this.setState({
-    //         windowWidth: window.innerWidth,
-    //         windowHeight: window.innerHeight
-    //     });
-    // }
+    updateWindowDimensions() {
+        this.setState({
+            windowWidth: window.innerWidth,
+            windowHeight: window.innerHeight
+        });
+    }
 
     render() {
         return (
@@ -59,7 +59,7 @@ class OrgPieChart extends Component {
                         <h5>Organization Transactions</h5>
                     </CardHeader>
                     <CardBody>
-                        <PieChart width={this.state.windowWidth/3} height={this.state.windowHeight/5}>
+                        <PieChart width={this.state.windowWidth/2.7} height={this.state.windowHeight/4.2}>
                             <Legend align="right" height={15} />
                             <Pie data={this.state.data} dataKey="value" nameKey="name" cx="50%" cy="50%"  outerRadius={50} label fill="fill" />
                             <Tooltip />
