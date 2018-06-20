@@ -51,24 +51,24 @@ div.menuItems > nav{
     height: 70px; */
     max-width: 200px;
     max-height: 50px;
-    transform: scale(1.0);
 }
 
 /* Scaling */
-.peer-graph{
-  min-width: 650px!important;
-  min-height: 165px!important;
-  margin-top: 10px;
-  margin-left: 100px!important;
-  margin-right: 100px!important;
-  transform: scale(1.0);
-}
 
 .chart-stats{
     margin-top: 10px;
-    margin-left: 0px!important;
     margin-left: 100px!important;
     margin-right: 100px!important;
+    transform: scale(1.0);
+    min-width: 650px!important;
+    min-height: 165px!important;
+}
+
+.orgtxscaled{
+    margin-top: 10px;
+    margin-left: 100px!important;
+    margin-right: 100px!important;
+    padding-left: auto;
     transform: scale(1.0);
     min-width: 650px!important;
     min-height: 165px!important;
@@ -78,22 +78,28 @@ div.menuItems > nav{
     margin-top: 10px;
     min-width: 650px!important;
     min-height: 165px!important;
+    margin-left: 100px!important;
     transform: scale(1.0);
 }
 
-/* .columnsscaled{
-    padding-left: 100px!important;
-    padding-right: 100px!important;
-    margin-left: 0px!important;
-    margin-right: 0px!important;
-    transform: scale(1.0);
-} */
+.peer-graph{
+  min-width: 650px!important;
+  min-height: 165px!important;
+  margin-top: 10px;
+  margin-left: 100px!important;
+  margin-right: 100px!important;
+  transform: scale(1.0);
+  padding-left: auto;
+}
 
 
 /* Dashboard */
  .count-card{
      min-width: 290px;
      min-height: 35px;
+     margin-left: auto;
+     margin-right: auto;
+     align-items: center;
      text-align: center;
  }
 .card-body > h4{

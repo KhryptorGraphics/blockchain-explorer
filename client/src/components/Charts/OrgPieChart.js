@@ -34,7 +34,7 @@ class OrgPieChart extends Component {
     }
     render() {
         return (
-            <div className="chart-stats">
+            <div className="orgtxscaled">
                 <Card>
                     <CardHeader>
                         <h5>Organization Transactions</h5>

@@ -289,7 +289,7 @@ class MenuBar extends Component {
           </Navbar>
         </div>
 
-        <div style={{ position: 'absolute', top: 200, left: 30, zIndex: 200 }}>
+        <div >
           {currentView}
         </div>
 

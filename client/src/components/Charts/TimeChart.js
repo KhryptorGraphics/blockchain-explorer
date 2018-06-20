@@ -36,7 +36,7 @@ const TimeChart = ({ chartData }) => {
           </ScatterChart>
         </CardContent>
       </Card>
-    </div >
+    </div>
   );
   function convertTime(date) {
     var hold = new Date(date);
