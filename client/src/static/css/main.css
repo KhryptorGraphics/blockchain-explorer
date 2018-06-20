@@ -30,7 +30,9 @@
 }
 /* Navigation bar */
  div.menuItems > nav > ul{
-    margin-left: 160px!important;
+    /* margin-left: 160px!important; */
+    margin-left: 100px!important;
+    margin-right: 100px!important;
     padding-top: 2px;
     padding-bottom: 2px;
 }
@@ -39,6 +41,7 @@
     color:#22313F;
     font-weight: bolder;
 }
+
 div.menuItems > nav{
     border-top: 2px #000000 solid;
     border-bottom: 2px #000000 solid;
@@ -46,9 +49,46 @@ div.menuItems > nav{
 .logo{
     /* width: 365px;
     height: 70px; */
-    width: 200px;
-    height: 50px;
+    max-width: 200px;
+    max-height: 50px;
+    transform: scale(1.0);
 }
+
+/* Scaling */
+.peer-graph{
+  min-width: 650px!important;
+  min-height: 165px!important;
+  margin-top: 10px;
+  margin-left: 100px!important;
+  margin-right: 100px!important;
+  transform: scale(1.0);
+}
+
+.chart-stats{
+    margin-top: 10px;
+    margin-left: 0px!important;
+    margin-left: 100px!important;
+    margin-right: 100px!important;
+    transform: scale(1.0);
+    min-width: 650px!important;
+    min-height: 165px!important;
+}
+
+.activity-stream{
+    margin-top: 10px;
+    min-width: 650px!important;
+    min-height: 165px!important;
+    transform: scale(1.0);
+}
+
+/* .columnsscaled{
+    padding-left: 100px!important;
+    padding-right: 100px!important;
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+    transform: scale(1.0);
+} */
+
 
 /* Dashboard */
  .count-card{
@@ -60,36 +100,21 @@ div.menuItems > nav{
     font-size: 20pt;
 }
  .dark-card{
-     /* background-color:#BFBFBF; */
-    /* background-color: #bdc3c7; */
-     /* background-color: #cfcfce; */
-     /* background-color: #6d6d6c; */
      background-color: #24272a;
      color:#f3f9f9;
  }
  .light-card{
-    /* background-color: #F2F1EF; */
     background-color: #5F6164;
     color:#f3f9f9;
  }
-.chart-stats{
-    margin-top: 10px;
-}
-.lower-dash{
-    margin-top:10px;
-}
-.activity-stream{
-    width: 633px;
-}
-.timeline{
-    height: 320px;
-}
+
 .timeline-event{
 
 }
 .timeline-items{
     background-color:#cfcfce;
     padding: 5px;
+    transform: scale(1.0);
 }
 .card-header{
     background-color: #24272a;
@@ -132,10 +157,10 @@ div.menuItems > nav{
     min-width: 730px;
 }
 .container{
-    padding-left: 280px;
+    /* padding-left: 280px; */
 }
 .peerList{
-    margin-left: 300px;
+    /* margin-left: 300px; */
     max-width: 550px;
 }
 .scrollTable{
@@ -157,17 +182,11 @@ div.menuItems > nav{
 .landing > div {
     margin-left: 150px;
 }
-.dashboard{
-    margin-left: 300px;
-}
 .wip{
     color:#bdc3c7;
     font-size:16pt;
 }
 /* Peer Graph  */
- .peer-graph{
-    width: 633px;
-}
 
 div.custom-container {
 	background-color: #242424;
