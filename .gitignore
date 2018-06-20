@@ -14,3 +14,8 @@ fabric-docker-compose-svt/crypto-config
 first-network/channel-artifacts/*
 .vscode
 log.txt
+
+/client/package-lock.json
+/config.json
+/package-lock.json
+/config.json--

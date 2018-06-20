@@ -34,9 +34,10 @@
     margin-left: 100px!important;
     margin-right: 100px!important;
     padding-top: 2px;
+    padding-bottom: 2px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 2px;
+    align-items: center;
 }
 
 .menuItems > nav > ul > li.active{
@@ -69,9 +70,8 @@ div.menuItems > nav{
 
 .orgtxscaled{
     margin-top: 10px;
-    padding-left: auto;
     margin-right: 100px!important;
-
+    padding-left: auto;
     /* transform: scale(1.0); */
     align-items: left;
 }
@@ -106,7 +106,7 @@ div.menuItems > nav{
      min-height: 39px;
      margin-left: auto;
      margin-right: auto;
-     align-items: center;
+     /* align-items: center; */
      text-align: center;
  }
 .card-body > h4{

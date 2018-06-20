@@ -18,8 +18,7 @@ class OrgPieChart extends Component {
                 { value: 43, name: "OrdererMSP", fill: "#0B091A" },
                 { value: 60, name: "Org1MSP", fill: "#29621e" },
                 { value: 23, name: "Org2MSP", fill: "#6ecd5b" }
-            ]
-            ,
+            ],
             windowWidth: window.innerWidth,
             windowHeight: window.innerHeight
         }
@@ -59,7 +58,7 @@ class OrgPieChart extends Component {
                         <h5>Organization Transactions</h5>
                     </CardHeader>
                     <CardBody>
-                        <PieChart width={this.state.windowWidth/2.7} height={this.state.windowHeight/4.2}>
+                        <PieChart width={this.state.windowWidth/3} height={this.state.windowHeight/5}>
                             <Legend align="right" height={15} />
                             <Pie data={this.state.data} dataKey="value" nameKey="name" cx="50%" cy="50%"  outerRadius={50} label fill="fill" />
                             <Tooltip />
