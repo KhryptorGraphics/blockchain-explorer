@@ -48,27 +48,23 @@ git clone https://github.com/distributedID/blockchain-explorer
 cd blockchain-explorer
 ```
 
-## Building the required Docker Images
+## Building Docker Images
 
-We need to build two images to properly use the `explorer`:
-
-1. Build the postgres image, located at `distributedid/postgres`. To build this image enter the following command:
+You can build all the necessary Docker images from the `bcmanager` project:
 
 ```
-bcmanager$ docker build -t distributedid/postgres-consumer -f ./docker/Dockerfile.postgres .
+bcmanager$ make buildDockerImages
 ```
 
-2.  Build the explorer image, located at `distributedid/explorer`. To build this image enter the following command:
+To build an image using local changes from the `blockchain-explorer` project:
 
 ```
-bcmanager$ docker build --build-arg REACT_APP_CLIENT=Provider -t distributedid/explorer-provider -f ./docker/Dockerfile.explorer .
-```
-```
-bcmanager$ docker build --build-arg REACT_APP_CLIENT=Consumer -t distributedid/explorer-consumer -f ./docker/Dockerfile.explorer .
+blockchain-explorer$ docker build --build-arg REACT_APP_CLIENT=Provider -t distributedid/explorer-provider -f ./Dockerfile.explorer .
+blockchain-explorer$ docker build --build-arg REACT_APP_CLIENT=Consumer -t distributedid/explorer-consumer -f ./Dockerfile.explorer .
 
 ```
 
-## How to start it?
+## Starting blockchain-explorer
 
 Steps:
 
@@ -78,114 +74,74 @@ Note: Run within the __bcmanager__ repository
 
 1. To run the `diid.network`. Enter the commands separately:
 
-```
-bcmanager$ make startEnv
-```
-```
-bcmanager$ make initExchChannel initPrivChannel
-```
-```
-bcmanager$ make sendIdentity sendEvent
-```
-```
-bcmanager$ make queryID
-```
+   ```
+   bcmanager$ make startNetwork initChannels
+   bcmanager$ make startRestApi startIdentityWriter
+   bcmanager$ make startProviderPostgres startConsumerPostgres
+   ```
+
+If all these commands are successful, you will have a Network running in docker with:
+
+- two initialized channels
+- services running to write identities and events
+- Postgres services running for `blockchain-explorer`
 
 ### Window 2:
 
-Note: Open a new window and run in the __bcmanager__ repository
+Note: Open a new window and run in the __bcmanager__ repository.
 
-1. Navigate to the root directory of the `postgres` image by entering:
-(This will take you to the root of the `docker-compose.yml` file, which contains the docker-compose file)
+1. To start the Explorer services in the Network using a Docker image:
 
-```
-cd /github.com/distributedID/bcmanager/docker/explorer
-```
+   ```
+   bcmanager $ make startExplorer
+   ```
 
-2. Use the command to launch the `postgres` image (only for the Provider):
+   Note: If editing the source code, you'll need to rebuild the Docker images in
+   `blockchain-explorer` and restart the Explorer services.
 
-```
-bcmanager/docker/explorer$ docker-compose up postgres-provider.diid.network
-```
+2. Or, to start the Explorer on your computer:
 
-### Window 3:
+   ```
+   # if a new branch or dependencies have changed
+   blockchain-explorer npm install
+   blockchain-explorer (cd client ; npm install )
 
-Note: Open a new window and run within the __blockchain-explorer__ repository. These install commands must be run when a new branch is started or a navigated to.
-
-1. Install the required packages in the blockchain-explorer repository. By executing the following commands:
-
-```
-blockchain-explorer$ npm install
-```
-```
-blockchain-explorer/client$ npm install
-```
-
-### Window 4:
-
-Note: Open a new window and run within the __blockchain-explorer__ repository
-
-1. Use the following commands to launch the `explorer` network:
-
-Note: To launch and view `Provider` UI run command:
-```
-blockchain-explorer/client$ REACT_APP_CLIENT=Producer npm run build
-```
-Note: To launch and view `Consumer` UI run command:
-```
-blockchain-explorer/client$ REACT_APP_CLIENT=Consumer npm run build
-```
-
-```
-blockchain-explorer$ npm start
-```
-
-
-2. The `blockchain-explorer` runs with the `Provider` as default. To run it as a consumer, one can change the `config.json`'s `client` configuration to:
-```
-{
-	...
-	"client": "Consumer"
-	...
-}
-```
-
-Note: If editing the source code, the two commands above must be re-run to compile any changes made. If this is not done the explorer will not display any changes!
+   blockchain-explorer (cd client ; REACT_APP_CLIENT=Producer npm run build )
+   # or
+   blockchain-explorer (cd client ; REACT_APP_CLIENT=Consumer npm run build )
+   blockchain-explorer npm start
+   ```
 
 ### Access the GUI
 
-1. Open the web-browser and access the `explorer` at `http://localhost:11000` .
+1. Open the web-browser and access the Provider Explorer at `http://localhost:11000`.
+2. Open the Consumer Provider at `https://localhost:11001`.
 
 
 ## How to stop it?
 
-Note: In the last window where the `explorer` network was started.
+To stop the explorer:
 
-1. Tear down the network by entering the following command:
-```
-blockchain-explorer$ ^C (Ctrl-C)
-```
+1. If you started it using the Docker image:
 
-Note: In the window where the `postgres` image was built.
+   ```
+   bcmanager $ docker stop explorer-provider.diid.network explorer-consumer.diid.network
+   ```
 
-2. Tear down the image by entering the following command:
+2. Or, if you started it with `npm`
 
-```
-bcmanager/docker/explorer$ ^C (Ctrl-C)
-```
-```
-bcmanager/docker/explorer$ docker-compose down
-```
+   ```
+   blockchain-explorer$ ^C (Ctrl-C)
+   ```
 
-Note: In the first window where the `diid.network` network was ran.
-
-3. Tear down the network by entering:
-
+To tear down the network and start over:
 ```
 bcmanager$ make stopEnv
 ```
 
-Note: These commands need to be preformed to properly tear down the networks so that they can be built in the future. Many problems can occur if these commands are not preformed.
+Note: These commands need to be preformed to properly tear down the networks so
+that they can be built in the future. Many problems can occur if these commands
+are not preformed.
 
 
 ## Troubleshooting:

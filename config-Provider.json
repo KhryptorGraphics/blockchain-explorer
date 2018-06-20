@@ -1,0 +1,64 @@
+{
+	"network-config": {
+		"org0": {
+			"name": "Org0",
+			"mspid": "Org0MSP",
+			"peer0": {
+				"requests": "grpcs://peer0.org0.diid.network:7051",
+				"events": "grpcs://peer0.org0.diid.network:7053",
+				"server-hostname": "peer0.org0.diid.network",
+				"tls_cacerts": "/opt/crypto-config/peerOrganizations/org0.diid.network/peers/peer0.org0.diid.network/tls/ca.crt"
+			},
+			"peer1": {
+				"requests": "grpcs://peer1.org0.diid.network:7051",
+				"events": "grpcs://peer1.org0.diid.network:7053",
+				"server-hostname": "peer1.org0.diid.network",
+				"tls_cacerts": "/opt/crypto-config/peerOrganizations/org0.diid.network/peers/peer1.org0.diid.network/tls/ca.crt"
+			},
+			"admin": {
+				"key": "/opt/crypto-config/peerOrganizations/org0.diid.network/users/Admin@org0.diid.network/msp/keystore",
+				"cert": "/opt/crypto-config/peerOrganizations/org0.diid.network/users/Admin@org0.diid.network/msp/signcerts"
+			}
+		},
+		"org1": {
+			"name": "Org1",
+			"mspid": "Org1MSP",
+			"peer0": {
+				"requests": "grpcs://peer0.org1.diid.network:7051",
+				"events": "grpcs://peer0.org1.diid.network:7053",
+				"server-hostname": "peer0.org1.diid.network",
+				"tls_cacerts": "/opt/crypto-config/peerOrganizations/org1.diid.network/peers/peer0.org1.diid.network/tls/ca.crt"
+			},
+			"peer1": {
+				"requests": "grpcs://peer1.org1.diid.network:7051",
+				"events": "grpcs://peer1.org1.diid.network:7053",
+				"server-hostname": "peer1.org1.diid.network",
+				"tls_cacerts": "/opt/crypto-config/peerOrganizations/org1.diid.network/peers/peer1.org1.diid.network/tls/ca.crt"
+			},
+			"admin": {
+				"key": "/opt/crypto-config/peerOrganizations/org1.diid.network/users/Admin@org1.diid.network/msp/keystore",
+				"cert": "/opt/crypto-config/peerOrganizations/org1.diid.network/users/Admin@org1.diid.network/msp/signcerts"
+			}
+		}
+	},
+	"host": "0.0.0.0",
+	"port": "11000",
+	"channel": "exchange-channel",
+	"client": "Provider",
+	"keyValueStore": "/tmp/fabric-client-kvs",
+	"eventWaitTime": "30000",
+	"users":[
+		{
+		   "username":"admin",
+		   "secret":"adminpw"
+		}
+	 ],
+	"pg": {
+		"host": "postgres-provider.diid.network",
+		"port": "5432",
+		"database": "fabricexplorer",
+		"username": "diid",
+		"passwd": "diid-diid"
+	},
+	"license": "Apache-2.0"
+}
