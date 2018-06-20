@@ -70,8 +70,12 @@ div.menuItems > nav{
     margin-right: 100px!important;
     padding-left: auto;
     transform: scale(1.0);
-    min-width: 650px!important;
-    min-height: 165px!important;
+    align-items: left;
+}
+
+.tabsscale{
+    transform: scale(1.0);
+    padding: 20px;
 }
 
 .activity-stream{
@@ -83,20 +87,18 @@ div.menuItems > nav{
 }
 
 .peer-graph{
-  min-width: 650px!important;
-  min-height: 165px!important;
   margin-top: 10px;
   margin-left: 100px!important;
   margin-right: 100px!important;
-  transform: scale(1.0);
   padding-left: auto;
+  transform: scale(1.0);
 }
 
 
 /* Dashboard */
  .count-card{
      min-width: 290px;
-     min-height: 35px;
+     min-height: 39px;
      margin-left: auto;
      margin-right: auto;
      align-items: center;
@@ -248,9 +250,6 @@ svg.custom path.link {
 }
 
 /* Admin Panel */
-/* .admin-panel{
-    width: 450px;
-} */
 .select-channel{
     width: 200px;
 }

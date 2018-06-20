@@ -23,8 +23,11 @@ class ChartStats extends Component {
         this.state = {
             activeTab: '1',
             loading: false,
+            windowWidth: window.innerWidth,
+            windowHeight: window.innerHeight
         }
         this.toggle = this.toggle.bind(this);
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
     }
     toggle(tab) {
@@ -40,8 +43,15 @@ class ChartStats extends Component {
             this.props.getBlocksPerHour(this.props.channel.currentChannel);
             this.props.getTxPerMin(this.props.channel.currentChannel);
             this.props.getTxPerHour(this.props.channel.currentChannel);
+            this.updateWindowDimensions();
+            window.addEventListener('resize', this.updateWindowDimensions);
         }, 6000)
     }
+
+    updateWindowDimensions() {
+      this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
+    }
+
     render() {
         return (
             <div className="chart-stats" >
@@ -49,7 +59,7 @@ class ChartStats extends Component {
                     <CardHeader>
                         <h5>Analytics</h5>
                     </CardHeader>
-                    <CardBody>
+                    <CardBody className="tabsscale">
                         <Nav tabs>
                             <NavItem>
                                 <NavLink

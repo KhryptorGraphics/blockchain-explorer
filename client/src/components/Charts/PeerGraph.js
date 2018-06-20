@@ -11,6 +11,9 @@ import {
 import { Graph } from 'react-d3-graph';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import 'react-tree-graph/dist/style.css';
+import Scaling, { gblWidth, gblHeight } from '../../Scaling';
+
+
 class PeerGraph extends Component {
     constructor(props) {
         super(props);
@@ -52,10 +55,20 @@ class PeerGraph extends Component {
                     "strokeWidth": 1.5,
                 }
             }
+            // ,
+            // windowWidth: window.innerWidth,
+            // windowHeight: window.innerHeight
 
         }
+        // this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
+
     componentDidMount() {
+        // setInterval(() => {
+        //     this.updateWindowDimensions();
+        //     window.addEventListener('resize', this.updateWindowDimensions);
+        // }, 6000)
+
         // var nodes = [];
         // var links = [];
         // for (var i = 0; i < this.props.peerList.length; i++) {
@@ -79,19 +92,29 @@ class PeerGraph extends Component {
         //         links: links
         //     }
         // });
-
     }
+
+    // updateWindowDimensions() {
+    //   this.setState({
+    //       windowWidth: window.innerWidth,
+    //       windowHeight: window.innerHeight
+    //   });
+    // }
+
+
     render() {
         return (
             <div className="peer-graph">
                 <Card>
                     <CardHeader>
-                        <h5>PeerGraph</h5>
+                        <h5>PeerGraph Width: {gblWidth/6}  Height: {gblHeight/6}</h5>
                     </CardHeader>
                     <CardBody>
                         <Graph id="graph-id"
+                            height={gblHeight/4}
+                            width={gblWidth/5}
                             data={this.state.data}
-                            config={this.state.myConfig} />
+                            config={this.state.myConfig}/>
                     </CardBody>
                 </Card>
             </div>
