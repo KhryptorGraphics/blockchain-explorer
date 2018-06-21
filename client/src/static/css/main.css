@@ -32,6 +32,7 @@
 /* Navigation bar */
  div.menuItems > nav > ul{
     margin-left: 100px!important;
+    margin-right: 100px!important;
     padding-top: 1px;
     padding-bottom: 1px;
     align-items: center;
