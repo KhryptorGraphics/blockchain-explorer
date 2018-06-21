@@ -4,7 +4,7 @@
 
 #root > div > div:nth-child(1) > nav > a
 {
-    font-size: 30pt;
+    font-size: 25pt;
     /* margin-left: 670px; */
     font-weight: 300;
 }
@@ -31,13 +31,9 @@
 }
 /* Navigation bar */
  div.menuItems > nav > ul{
-    /* margin-left: 160px!important; */
     margin-left: 100px!important;
-    margin-right: 100px!important;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    /* padding-left: 15px;
-    padding-right: 15px; */
+    padding-top: 1px;
+    padding-bottom: 1px;
     align-items: center;
 }
 
@@ -50,6 +46,27 @@ div.menuItems > nav{
     border-top: 2px #000000 solid;
     border-bottom: 2px #000000 solid;
 }
+
+.count-card{
+    min-width: 200px;
+    height: 70px;
+    /* margin-left: 0.6vw;
+    margin-right: 0.6vw; */
+    /* align-items: center; */
+    text-align: center;
+}
+.card-body > h4{
+   font-size: 15pt;
+}
+.dark-card{
+    background-color: #24272a;
+    color:#f3f9f9;
+}
+.light-card{
+   background-color: #5F6164;
+   color:#f3f9f9;
+}
+
 .logo{
     /* width: 365px;
     height: 70px; */
@@ -106,38 +123,21 @@ div.menuItems > nav{
 
 
 /* Dashboard */
- .count-card{
-     min-width: 200px;
-     height: 80px;
-     margin-left: auto;
-     margin-right: auto;
-     /* align-items: center; */
-     text-align: center;
- }
-.card-body > h4{
-    font-size: 15pt;
-}
- .dark-card{
-     background-color: #24272a;
-     color:#f3f9f9;
- }
- .light-card{
-    background-color: #5F6164;
-    color:#f3f9f9;
- }
 
 .timeline-event{
 
 }
 .timeline-items{
     background-color:#cfcfce;
-    padding: 5px;
+    padding: 2px;
     transform: scale(1.0);
 }
 .card-header{
     background-color: #24272a;
      color:#f7f7f7;
      font:bold;
+     margin-top: auto;
+     margin-bottom: auto;
 }
 /* Table and List  */
 #root > div > div.App > div > div:nth-child(1) > div > div:nth-child(2) > div > table{
@@ -190,15 +190,25 @@ div.menuItems > nav{
     position: relative;
 }
 /* Landing page css */
-.landing{
+.element{
+    align-items: center;
+    padding-top: 30vh;
+    padding-left: 30vw;
+    height: 40vh; /* For 100% screen height */
+    width:  40vw; /* For 100% screen width */
+}
+
+/* .landing{
     margin-top: 450px;
     margin-left: 550px;
-}
+} */
 .landing > h1{
-    font-size: 40pt;
+    font-size: 35pt;
 }
 .landing > div {
-    margin-left: 150px;
+    height: 50vh; /* For 100% screen height */
+    width:  30vw;
+    margin-left: 140px;
 }
 .wip{
     color:#bdc3c7;

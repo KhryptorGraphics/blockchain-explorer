@@ -60,7 +60,7 @@ class LandingPage extends Component {
     }
     render() {
         return (
-            <div className="landing" >
+            <div className="landing element" >
                 <img src={Logo} style={this.state.logoStyle} alt="DistributedID Logo" />
                 <Slider {...this.state.settings}>
                     <div><h3>ACCESSING THE NETWORK</h3></div>
