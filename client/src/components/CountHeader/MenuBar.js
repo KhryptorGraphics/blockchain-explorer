@@ -63,7 +63,8 @@ class MenuBar extends Component {
       countHeader: { countHeader: this.props.getCountHeader() },
       blockHeight: 0,
       uuidHeight: 0,
-    }
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight    }
 
     this.handleClickTransactionView = this.handleClickTransactionView.bind(this);
     this.handleClickBlockView = this.handleClickBlockView.bind(this);
@@ -71,6 +72,7 @@ class MenuBar extends Component {
     this.handleClickPeerView = this.handleClickPeerView.bind(this);
     this.handleClickDashboardView = this.handleClickDashboardView.bind(this);
     this.handleClickMatchedUUIDView = this.handleClickMatchedUUIDView.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   blockAddedNotify(){
@@ -126,7 +128,13 @@ class MenuBar extends Component {
       this.props.getCountHeader(this.props.channel.currentChannel);
       this.props.getLatestBlock(this.props.channel.currentChannel, 0);
       this.props.getUUIDStatusList(this.props.channel.currentChannel);
+      this.updateWindowDimensions();
+      window.addEventListener('resize', this.updateWindowDimensions);
     }, 3000)
+  }
+
+  updateWindowDimensions() {
+    this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -251,35 +259,35 @@ class MenuBar extends Component {
               <Row>
                   <Col>
                       <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>
-                          <Card body className="count-card light-card">
+                          <Card body className="count-card light-card" width={(this.state.windowWidth/5)-60}>
                                   <h4> <FontAwesome name="connectdevelop" /> Network</h4>
                           </Card>
                       </NavItem>
                   </Col>
                   <Col>
                       <NavItem active={this.state.activeTab.blocksTab} onClick={this.handleClickBlockView}>
-                          <Card body className="count-card dark-card">
+                          <Card body className="count-card dark-card" width={(this.state.windowWidth/5)-60}>
                                   <h4> <FontAwesome name="cubes" /> Blocks</h4>
                           </Card>
                       </NavItem>
                   </Col>
                   <Col>
                       <NavItem active={this.state.activeTab.txTab} onClick={this.handleClickTransactionView}>
-                          <Card body className="count-card light-card" >
+                          <Card body className="count-card light-card" width={(this.state.windowWidth/5)-60} >
                                   <h4><FontAwesome name="list-alt" /> Transactions</h4>
                           </Card>
                       </NavItem>
                   </Col>
                   <Col>
                       <NavItem active={this.state.activeTab.chaincodesTab} onClick={this.handleClickChaincodeView }>
-                          <Card body className="count-card dark-card" >
+                          <Card body className="count-card dark-card" width={(this.state.windowWidth/5)-60} >
                                   <h4><FontAwesome name="handshake-o" />  Chaincodes</h4>
                           </Card>
                       </NavItem>
                   </Col>
                   <Col>
                       <NavItem active={this.state.activeTab.matchedUUIDTab} onClick={this.handleClickMatchedUUIDView }>
-                         <Card body className="count-card light-card" >
+                         <Card body className="count-card light-card" width={(this.state.windowWidth/5)-60} >
                                  <h4><FontAwesome name="users" />  UUID</h4>
                          </Card>
                       </NavItem>

@@ -36,8 +36,8 @@
     margin-right: 100px!important;
     padding-top: 2px;
     padding-bottom: 2px;
-    padding-left: 15px;
-    padding-right: 15px;
+    /* padding-left: 15px;
+    padding-right: 15px; */
     align-items: center;
 }
 
@@ -113,11 +113,11 @@ div.menuItems > nav{
 
 /* Dashboard */
  .count-card{
-     width: 290px;
+     /* width: 290px; */
      min-height: 39px;
-     /* margin-left: auto;
+     margin-left: auto;
      margin-right: auto;
-     align-items: center; */
+     /* align-items: center; */
      text-align: center;
      transform: scale(0.9);
  }
