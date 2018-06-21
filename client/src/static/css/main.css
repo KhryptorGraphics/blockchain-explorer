@@ -4,7 +4,7 @@
 
 #root > div > div:nth-child(1) > nav > a
 {
-    font-size: 34pt;
+    font-size: 30pt;
     /* margin-left: 670px; */
     font-weight: 300;
 }
@@ -22,12 +22,12 @@
 .bell{
     margin-top: 36px;
     color: #5F6164;
-    font-size: 18pt;
+    font-size: 15pt;
 }
 .bell:hover{
     margin-top: 36px;
     color: #24272a;
-    font-size: 18pt;
+    font-size: 15pt;
 }
 /* Navigation bar */
  div.menuItems > nav > ul{
@@ -59,12 +59,6 @@ div.menuItems > nav{
 
 /* Scaling */
 
-.scaleDown{
-    transform: scale(0.9);
-}
-/* .scaleUp{
-    transform: scaleY(1.1);
-} */
 .chart-stats{
     margin-top: 5px;
     margin-bottom: 10px;
@@ -113,16 +107,14 @@ div.menuItems > nav{
 
 /* Dashboard */
  .count-card{
-     /* width: 290px; */
-     min-height: 39px;
+     height: 80px;
      margin-left: auto;
      margin-right: auto;
      /* align-items: center; */
      text-align: center;
-     transform: scale(0.9);
  }
 .card-body > h4{
-    font-size: 20pt;
+    font-size: 15pt;
 }
  .dark-card{
      background-color: #24272a;
