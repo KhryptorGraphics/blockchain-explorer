@@ -39,7 +39,7 @@ Hyperledger Explorer works with Hyperledger Fabric 1.0.  Install the following s
 1. Clone the `blockchain-explorer` repository into your local DistributedID folder. To get the latest version use the following command:
 
 ```
-git clone https://github.com/distributedID/blockchain-explorer
+git clone https://github.com/khryptorgraphics/blockchain-explorer
 ```
 
 2. Navigate to the `blockchain-explorer` repository using the following command:
