@@ -92,16 +92,16 @@ class ChartStats extends Component {
                         </Nav>
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
-                                <TimeChart chartData={this.props.blockPerHour.blockPerHour} width={(this.state.windowWidth/2.78)-100} height={this.state.windowHeight/4.8} />
+                                <TimeChart chartData={this.props.blockPerHour.blockPerHour} width={(this.state.windowWidth/2.78)-60} height={this.state.windowHeight/4.8} />
                             </TabPane>
                             <TabPane tabId="2">
-                                <TimeChart chartData={this.props.blockPerMin.blockPerMin} width={(this.state.windowWidth/2.78)-100} height={this.state.windowHeight/4.8} />
+                                <TimeChart chartData={this.props.blockPerMin.blockPerMin} width={(this.state.windowWidth/2.78)-60} height={this.state.windowHeight/4.8} />
                             </TabPane>
                             <TabPane tabId="3">
-                                <TimeChart chartData={this.props.txPerHour.txPerHour} width={(this.state.windowWidth/2.78)-100} height={this.state.windowHeight/4.8} />
+                                <TimeChart chartData={this.props.txPerHour.txPerHour} width={(this.state.windowWidth/2.78)-60} height={this.state.windowHeight/4.8} />
                             </TabPane>
                             <TabPane tabId="4">
-                                <TimeChart chartData={this.props.txPerMin.txPerMin} width={(this.state.windowWidth/2.78)-100} height={this.state.windowHeight/4.8} />
+                                <TimeChart chartData={this.props.txPerMin.txPerMin} width={(this.state.windowWidth/2.78)-60} height={this.state.windowHeight/4.8} />
                             </TabPane>
                         </TabContent>
                     </CardBody>

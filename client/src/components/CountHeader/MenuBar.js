@@ -244,8 +244,8 @@ class MenuBar extends Component {
     }
 
     return (
-      <div className="scaleDown">
-        <div className="menuItems">
+      <div>
+        <div className="menuItems scaleDown">
           <Navbar color="faded" light expand="xs" margin-left="0px">
             <Nav className="ml-auto" navbar>
               <Row>
