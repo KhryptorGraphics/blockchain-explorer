@@ -251,7 +251,6 @@ class MenuBar extends Component {
         currentView = <DashboardView />;
         break;
     }
-
     return (
       <div>
         <div className="menuItems">
@@ -260,7 +259,7 @@ class MenuBar extends Component {
               <Row>
                   <Col>
                       <NavItem active={this.state.activeTab.peersTab} onClick={this.handleClickPeerView}>
-                          <Card body width={this.state.windowWidth} className="count-card light-card">
+                          <Card body className="count-card light-card">
                                   <h4> <FontAwesome name="connectdevelop" /> Network </h4>
                           </Card>
                       </NavItem>
