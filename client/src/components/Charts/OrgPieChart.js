@@ -58,7 +58,7 @@ class OrgPieChart extends Component {
                         <h5>Organization Transactions</h5>
                     </CardHeader>
                     <CardBody>
-                        <PieChart width={this.state.windowWidth/3} height={this.state.windowHeight/5}>
+                        <PieChart width={(this.state.windowWidth/2.78)-100} height={this.state.windowHeight/4.8}>
                             <Legend align="right" height={15} />
                             <Pie data={this.state.data} dataKey="value" nameKey="name" cx="50%" cy="50%"  outerRadius={50} label fill="fill" />
                             <Tooltip />

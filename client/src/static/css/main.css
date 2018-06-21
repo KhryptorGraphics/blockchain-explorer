@@ -4,7 +4,7 @@
 
 #root > div > div:nth-child(1) > nav > a
 {
-    font-size: 30pt;
+    font-size: 34pt;
     /* margin-left: 670px; */
     font-weight: 300;
 }
@@ -13,6 +13,7 @@
     padding-bottom: 0px;
     height: 75px;
 }
+
 .admin-buttons{
     margin-left: 10px;
     margin-right: 10px;
@@ -57,9 +58,15 @@ div.menuItems > nav{
 }
 
 /* Scaling */
-
+.scaleDown{
+    transform: scale(0.95);
+}
+/* .scaleUp{
+    transform: scaleY(1.1);
+} */
 .chart-stats{
     margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 100px!important;
     margin-right: 100px!important;
     /* transform: scale(1.0); */
@@ -70,6 +77,7 @@ div.menuItems > nav{
 
 .orgtxscaled{
     margin-top: 10px;
+    margin-bottom: 10px;
     margin-right: 100px!important;
     padding-left: auto;
     /* transform: scale(1.0); */
@@ -83,6 +91,7 @@ div.menuItems > nav{
 
 .activity-stream{
     margin-top: 10px;
+    margin-bottom: 10px;
     /* min-width: 650px!important;
     min-height: 165px!important; */
     margin-left: 100px!important;
@@ -93,6 +102,7 @@ div.menuItems > nav{
 
 .peer-graph{
   margin-top: 10px;
+  margin-bottom: 10px;
   margin-right: 100px!important;
   padding-left: auto;
   /* transform: scale(1.0); */

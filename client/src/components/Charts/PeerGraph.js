@@ -111,7 +111,7 @@ class PeerGraph extends Component {
                     </CardHeader>
                     <CardBody>
                         <Graph id="graph-id"
-                            width={this.state.windowWidth/2.7}
+                            width={(this.state.windowWidth/2.78)-100}
                             height={this.state.windowHeight/4.8}
                             data={this.state.data}
                             config={this.state.myConfig}/>
