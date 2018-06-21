@@ -101,12 +101,10 @@ class MenuBar extends Component {
   }
 
   componentWillMount() {
-
   }
 
   componentWillReceiveProps(nextProps) {
     if (JSON.stringify(nextProps.countHeader) !== JSON.stringify(this.props.countHeader)) {
-      // console.log('nextProps.countHeader !== this.props.countHeader')
       this.setState({ countHeader: nextProps.countHeader });
     }
 
@@ -131,6 +129,13 @@ class MenuBar extends Component {
 
   componentDidUpdate(prevProps, prevState) {
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+      if (nextProps.clickCount != this.props.clickCount){
+          this.setState({ activeView: nextProps.activeView });
+      }
+      return true;
+    }
 
   handleClickTransactionView() {
     this.setState({ activeView: 'TransactionView' });
@@ -230,7 +235,7 @@ class MenuBar extends Component {
         currentView = <Peers peerList={this.props.peerList} />;
         break;
       case 'DashboardView':
-        currentView = <DashboardView />;
+        currentView = <DashboardView clickCount={this.props.clickCount}/>;
         break;
       case 'ChaincodeView':
         currentView = <Chaincodes channel={this.props.channel} countHeader={this.props.countHeader} chaincodes={this.props.chaincodes} getChaincodes={this.props.getChaincodes}/>;
@@ -239,7 +244,7 @@ class MenuBar extends Component {
         currentView = <MatchedUUID channel={this.props.channel} countHeader={this.props.countHeader} uuidList={this.props.uuidList.rows} getUUIDStatusList={this.props.getUUIDStatusList} uuid={this.props.uuid} getUUIDStatusRow={this.props.getUUIDStatusRow}/>;
         break;
       default:
-        currentView = <DashboardView />;
+        currentView = <DashboardView clickCount={this.props.clickCount}/>;
         break;
     }
 

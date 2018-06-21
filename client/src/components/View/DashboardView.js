@@ -23,8 +23,12 @@ class DashboardView extends Component {
     componentDidMount() {
         setInterval(() => {
             this.props.getTxByOrg(this.props.channel.currentChannel);
-        }, 60000)
+        }, 10000)
     }
+
+    componentWillReceiveProps(nextProps){
+    }
+
     render() {
         return (
             <div className="dashboard" >
@@ -33,7 +37,7 @@ class DashboardView extends Component {
                         <ChartStats />
                     </Col>
                     <Col lg="6">
-                        <OrgPieChart txByOrg={this.props.txByOrg} />
+                        <OrgPieChart txByOrg={this.props.txByOrg} clickCount={this.props.clickCount}/>
                     </Col>
                 </Row>
                 <Row className="lower-dash">

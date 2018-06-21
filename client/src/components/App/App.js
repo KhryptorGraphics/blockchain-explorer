@@ -28,7 +28,9 @@ const muiTheme = createMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true }
+    this.state = { loading: true, activeView: 'DashboardView'}
+
+    this.newFunction = this.newFunction.bind(this);
   }
   componentWillMount() {
     setTimeout(() => this.setState({ loading: false }), 6000);
@@ -36,6 +38,11 @@ class App extends Component {
   componentDidMount() {
 
   }
+
+  newFunction = (dataFromChild) => {
+      this.setState({ activeView: 'DashboardView' });
+  }
+
   render() {
     if (this.state.loading) {
       return (
@@ -45,8 +52,8 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={muiTheme} >
         <div>
-          <HeaderView />
-          <Main />
+          <HeaderView callbackFromParent={this.newFunction}/>
+          <Main activeView={this.state.activeView}/>
         </div>
       </MuiThemeProvider>
     );

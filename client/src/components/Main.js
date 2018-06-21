@@ -2,19 +2,22 @@
  *    SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Layout from './Layout/index';
 
-const Main = () =>
-  (
-      <Router>
-        <div className="App">
-          <Switch>
-            <Route exact path='/' component={Layout} />
-          </Switch>
-        </div>
-      </Router>
-  )
+class Main extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-export default Main
+    render() {
+        return (
+            <div>
+                <Layout activeView={this.props.activeView}/>
+            </div>
+        )
+    }
+}
+
+export default Main;

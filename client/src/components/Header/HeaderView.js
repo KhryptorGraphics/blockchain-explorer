@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import Select from 'react-select';
 import {
-  Nav, Navbar, NavbarBrand, NavbarToggler
+  Nav, Navbar, NavbarBrand, NavbarToggler, NavItem
 } from 'reactstrap';
 import AdminPanel from '../Panels/Admin';
 import Logo from '../../static/images/DIIDLogo.svg';
@@ -18,9 +18,10 @@ import FontAwesome from 'react-fontawesome';
 import Drawer from 'material-ui/Drawer';
 import NotificationPanel from '../Panels/Notifications';
 import Websocket from 'react-websocket';
-// import { Badge } from 'reactstrap';
 import Badge from 'material-ui/Badge';
 import { getNotification as getNotificationCreator } from '../../store/actions/notification/action-creators';
+import DashboardView from '../View/DashboardView';
+
 
 const styles = theme => ({
   margin: {
@@ -42,18 +43,12 @@ class HeaderView extends Component {
       notifications: [],
       modalOpen: false
     }
-    this.toggle = this.toggle.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleDrawOpen = this.handleDrawOpen.bind(this);
     this.handleDrawClose = this.handleDrawClose.bind(this);
+  }
 
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
   handleData(notification) {
     this.props.getNotification(notification);
     var notifyArr = this.state.notifications;
@@ -72,13 +67,9 @@ class HeaderView extends Component {
     });
 
     this.setState({ channels: arr });
-
     this.setState({ selectedOption: arr[0] })
-
   }
   componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.trades);
-    // this.setState({loading:false});
   }
 
   handleChange = (selectedOption) => {
@@ -87,7 +78,6 @@ class HeaderView extends Component {
   handleOpen() {
     this.setState({ modalOpen: true });
   }
-
   handleClose() {
     this.setState({ modalOpen: false });
   }
@@ -125,15 +115,15 @@ class HeaderView extends Component {
 
   render() {
     const { classes } = this.props;
-
+    const navItemStyle={
+        listStyleType: 'none'
+    };
     return (
       <div>
-        <Websocket url='ws://localhost:8080/'
-          onMessage={this.handleData.bind(this)} reconnect={true} />
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/"> <img src={Logo} className="logo" alt="DistributedID Logo" /></NavbarBrand>
-          {/* <NavbarBrand href="/"> HYPERLEDGER EXPLORER</NavbarBrand> */}
-          <NavbarToggler onClick={this.toggle} />
+          <NavItem onClick={() => this.props.callbackFromParent("DashboardView")} style={navItemStyle}>
+                    <img src={Logo} className="logo" alt="DistributedID Logo" />
+          </NavItem>
           <div className="providerlabel">
               <h1>{ process.env.REACT_APP_CLIENT }</h1>
           </div>
